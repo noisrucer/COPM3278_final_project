@@ -1,20 +1,20 @@
--- Active: 1667122590589@@127.0.0.1@3306@final_project
 CREATE TABLE Student (
-    student_id  INT NOT NULL AUTO_INCREMENT,
+    student_id VARCHAR(100) NOT NULL,
     name VARCHAR(30) NOT NULL,
     gender VARCHAR(1) NOT NULL,
     age INT NOT NULL,
     PRIMARY KEY(student_id)
 );
+
 CREATE TABLE Course (
-    course_id  INT NOT NULL AUTO_INCREMENT,
+    course_id VARCHAR(100) NOT NULL,
     name VARCHAR(30) NOT NULL,
-    description VARCHAR(800) NOT NULL,
+    description VARCHAR(2000) NOT NULL,
     PRIMARY KEY(course_id)
 );
 CREATE TABLE Subclass (
-    subclass_id INT NOT NULL AUTO_INCREMENT,
-    course_id INT NOT NULL,
+    subclass_id VARCHAR(100) NOT NULL,
+    course_id VARCHAR(100) NOT NULL,
     time DATETIME NOT NULL,
     address VARCHAR(100) NOT NULL,
     teacher_message VARCHAR(800) NOT NULL,
@@ -25,8 +25,8 @@ CREATE TABLE Subclass (
 
 CREATE TABLE SubclassEvent(
     subclass_event_id INT NOT NULL AUTO_INCREMENT,
-    course_id INT NOT NULL, 
-    subclass_id INT NOT NULL,
+    course_id VARCHAR(100) NOT NULL, 
+    subclass_id VARCHAR(100) NOT NULL,
     type ENUM('lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
     name VARCHAR(100) NOT NULL,
     hyperlink VARCHAR(500) NOT NULL,
@@ -36,8 +36,8 @@ CREATE TABLE SubclassEvent(
 );
 
 CREATE TABLE StudentEnrollsCourse(
-    course_id INT NOT NULL,
-    student_id INT NOT NULL,
+    course_id VARCHAR(100) NOT NULL,
+    student_id VARCHAR(100) NOT NULL,
     enroll_date DATETIME NOT NULL,
     PRIMARY KEY(course_id, student_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id),
@@ -46,7 +46,7 @@ CREATE TABLE StudentEnrollsCourse(
 
 CREATE TABLE Logging(
     logging_id INT NOT NULL AUTO_INCREMENT,
-    student_id INT NOT NULL,
+    student_id VARCHAR(100) NOT NULL,
     login_time DATETIME NOT NULL,
     logout_time DATETIME,
     PRIMARY KEY(logging_id),
@@ -55,7 +55,7 @@ CREATE TABLE Logging(
 
 CREATE TABLE EmailActivity(
     email_activity_id INT NOT NULL AUTO_INCREMENT,
-    student_id INT NOT NULL,
+    student_id VARCHAR(100) NOT NULL,
     action_date DATETIME NOT NULL,
     PRIMARY KEY(email_activity_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
@@ -63,7 +63,7 @@ CREATE TABLE EmailActivity(
 
 CREATE TABLE RedirectionActivity(
     redirection_activity_id INT NOT NULL AUTO_INCREMENT,
-    student_id INT NOT NULL,
+    student_id VARCHAR(100) NOT NULL,
     type ENUM('zoom link', 'lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
     action_date DATETIME NOT NULL,
     PRIMARY KEY(redirection_activity_id),
