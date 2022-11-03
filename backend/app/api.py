@@ -2,6 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
+import mysql.connector
+import configparser
+
+# Configs
+config = configparser.ConfigParser()
+config.read('backend/backend.ini')
+print("Config:", {section: dict(config[section]) for section in config.sections()})
+
+# Server setup
 app = FastAPI()
 
 origins = [
@@ -18,6 +27,15 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+# Database setup
+db_connector = mysql.connector.connect(user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
+db_cursor = db_connector.cursor()
+
+# TODO: remove demo
+db_cursor.execute('select * from Course')
+values = db_cursor.fetchall()
+print(values)
+print("finish executing...")
 
 @app.get("/", tags=["root"], response_class=HTMLResponse)
 async def read_root() -> dict:
