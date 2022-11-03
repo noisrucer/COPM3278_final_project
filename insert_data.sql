@@ -1,8 +1,10 @@
 INSERT INTO Student VALUES
-('3035435840', 'Changjin Lee', 'M', 25),
-('3035555626', 'Yonghyun Kwon', 'M', 24),
-('3035604075', 'Yeon Park', 'M',23),
-('3035729423', 'Jungan Choi','F',22);
+('3035435840', 'Changjin Lee', 'M', 25, "changjin9792@gmail.com"),
+('3035555626', 'Yonghyun Kwon', 'M', 24, "u3555562@connect.hku.hk"),
+('3035604075', 'Yeon Park', 'M',23, "pyeon99@gmail.com"),
+('3035729423', 'Jungan Choi','F',22, "junganchoi26@gmail.com"),
+('3035786603', 'Lo Yu Sum', 'M', 20, "loyusum246807952@gmail.com")
+
 
 INSERT INTO Course VALUES
 ('COMP3278', 'Intro. to Database Management Systems', 'This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity, and concurrency control.'),
@@ -57,8 +59,8 @@ INSERT INTO Logging VALUES
 
 -- We can't have a student doing any activity if not enrolled in the course
 INSERT INTO EmailActivity VALUES
-(0, '3035435840', '2022-09-08 06:24:51'),
-(1, '3035604075', '2022-10-27 16:55:30');
+(0, '3035435840', 'COMP3230', 'A', '2022-09-08 06:24:51'),
+(1, '3035604075', 'COMP3258', 'A', '2022-10-27 16:55:30');
 
 INSERT INTO RedirectionActivity VALUES
 (0, '3035604075', 'zoom_link', '2022-09-22 09:11:41'),

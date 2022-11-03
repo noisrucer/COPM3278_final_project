@@ -3,6 +3,7 @@ CREATE TABLE Student (
     name VARCHAR(100) NOT NULL,
     gender VARCHAR(1) NOT NULL,
     age INT NOT NULL,
+    email_address VARCHAR(250) NOT NULL,
     PRIMARY KEY(student_id)
 );
 
@@ -26,7 +27,7 @@ CREATE TABLE Subclass (
 );
 
 CREATE TABLE SubclassEvent(
-    subclass_event_id INT NOT NULL  ,
+    subclass_event_id INT NOT NULL,
     course_id VARCHAR(100) NOT NULL, 
     subclass_id VARCHAR(100) NOT NULL,
     type ENUM('lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
@@ -49,10 +50,11 @@ CREATE TABLE StudentEnrollsSubclass(
 );
 
 CREATE TABLE Logging(
-    logging_id INT NOT NULL  ,
+    logging_id INT NOT NULL,
     student_id VARCHAR(100) NOT NULL,
     login_time DATETIME NOT NULL,
     logout_time DATETIME,
+    login_token VARCHAR(300),
     PRIMARY KEY(logging_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
 );
@@ -66,7 +68,7 @@ CREATE TABLE EmailActivity(
 );
 
 CREATE TABLE RedirectionActivity(
-    redirection_activity_id INT NOT NULL  ,
+    redirection_activity_id INT NOT NULL,
     student_id VARCHAR(100) NOT NULL,
     type ENUM('zoom_link', 'lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
     action_date DATETIME NOT NULL,
