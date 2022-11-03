@@ -13,16 +13,18 @@ CREATE TABLE Course (
     description VARCHAR(2000) NOT NULL,
     PRIMARY KEY(course_id)
 );
+
+--stime and etime should start counting from 1970-06-01--
+--e.g. 1970-06-05 14:30 for FRI 14:30--
 CREATE TABLE Subclass (
     subclass_id VARCHAR(100) NOT NULL,
     course_id VARCHAR(100) NOT NULL,
-    time1 VARCHAR(100) NOT NULL,
-    time2 VARCHAR(100) NOT NULL,
-    address1 VARCHAR(100) NOT NULL,
-    address2 VARCHAR(100) NOT NULL,
+    stime TIMESTAMP NOT NULL,
+    etime TIMESTAMP NOT NULL,
+    class_loca VARCHAR(100) NOT NULL,
     teacher_message VARCHAR(800) NOT NULL,
     zoom_link VARCHAR(500) NOT NULL,
-    PRIMARY KEY(subclass_id, course_id),
+    PRIMARY KEY(subclass_id, course_id, stime, etime),
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
