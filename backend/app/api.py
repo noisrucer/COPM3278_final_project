@@ -32,10 +32,24 @@ db_connector = mysql.connector.connect(user=config['Database']['user'], password
 db_cursor = db_connector.cursor()
 
 # TODO: remove demo
-db_cursor.execute('select * from Course')
-values = db_cursor.fetchall()
-print(values)
-print("finish executing...")
+
+# Utility setup
+def db_select(query: str):
+    db_cursor.execute(query)
+    return db_cursor.fetchall()
+
+def db_exe_file(path: str, modifier):
+    result = []
+    with open(path, 'r') as f:
+        results = db_cursor.execute(modifier(f.read()), multi=True)
+        for cur in results:
+            if cur.with_rows:
+                result.append(cur.fetchall())
+    
+    return result
+
+hours = 1
+print(db_exe_file(R'C:\Users\samsa\Documents\Code\Asm\COMP3278\FP\COPM3278_final_project\backend\sql\subclass_within_time.sql', lambda s : s.replace("__TIME_RANGE__", "60 * 60 * {}".format(hours))))
 
 @app.get("/", tags=["root"], response_class=HTMLResponse)
 async def read_root() -> dict:
