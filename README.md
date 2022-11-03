@@ -9,6 +9,12 @@
 - Yeon Park
 - Sam
 
+### Environment
+
+``` shell
+pip install fastapi "uvicorn[standard]" mysql-connector-python
+```
+
 ### Start backend by
 
 ``` shell
