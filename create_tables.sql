@@ -62,8 +62,12 @@ CREATE TABLE Logging(
 CREATE TABLE EmailActivity(
     email_activity_id INT NOT NULL  ,
     student_id VARCHAR(100) NOT NULL,
+    course_id VARCHAR(100) NOT NULL,
+    subclass_id VARCHAR(100) NOT NULL,
     action_date DATETIME NOT NULL,
     PRIMARY KEY(email_activity_id),
+    FOREIGN KEY(course_id) REFERENCES Course(course_id),
+    FOREIGN KEY(subclass_id) REFERENCES StudentEnrollsSubclass(subclass_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
 );
 
