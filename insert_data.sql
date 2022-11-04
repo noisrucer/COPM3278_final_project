@@ -13,16 +13,16 @@ INSERT INTO Course VALUES
 ('COMP3258', 'Functional Programming', 'The course teaches the basics of functional programming using the language Haskell. The main goal is introduce students to fundamental programming concepts such as recursion, abstraction, lambda expressions and higher-order functions and data types. The course will also study the mathematical reasoning involved in the design of functional programs and techniques for proving properties about functions so defined. With the adoption of lambda expressions recent versions of Java, C++ or C#, functional programming and related programming techniques are becoming increasingly more relevant even for programmers of languages that are not traditionally viewed as functional. This course is important to introduce students to such techniques.');
 
 INSERT INTO Subclass VALUES
-('A', 'COMP3278', '1970-06-01 14:30', '1970-06-01 15:20', 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3278', '1970-06-04 13:30', '1970-06-04 15:20', 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 'CPD-LG.01', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
-('A', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 'CYPP2', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
-('B', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 'TBC', 'Welcome to COMP3230B!', 'TBC'),
-('B', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 'TBC', 'Welcome to COMP3230B!', 'TBC'),
-('A', 'COMP3330', '1970-06-01 12:30', '1970-06-01 14:20', 'LE4', 'Welcome to COMP3330!', 'TBC'),
-('A', 'COMP3330', '1970-06-04 12:30', '1970-06-04 13:20', 'LE4', 'Welcome to COMP3330!', 'TBC'),
-('A', 'COMP3258', '1970-06-02 13:30', '1970-06-02 15:20', 'MB167', 'Welcome to COMP3258!', 'TBC'),
-('A', 'COMP3258', '1970-06-05 14:30', '1970-06-05 15:20', 'MB167', 'Welcome to COMP3258!', 'TBC')
+('A', 'COMP3278', '1970-06-01 14:30', '1970-06-01 15:20', 1, 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+('A', 'COMP3278', '1970-06-04 13:30', '1970-06-04 15:20', 1, 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+('A', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 1, 'CPD-LG.01', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
+('A', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 1, 'CYPP2', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
+('B', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 1, 'TBC', 'Welcome to COMP3230B!', 'TBC'),
+('B', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 1, 'TBC', 'Welcome to COMP3230B!', 'TBC'),
+('A', 'COMP3330', '1970-06-01 12:30', '1970-06-01 14:20', 1, 'LE4', 'Welcome to COMP3330!', 'TBC'),
+('A', 'COMP3330', '1970-06-04 12:30', '1970-06-04 13:20', 1, 'LE4', 'Welcome to COMP3330!', 'TBC'),
+('A', 'COMP3258', '1970-06-02 13:30', '1970-06-02 15:20', 1, 'MB167', 'Welcome to COMP3258!', 'TBC'),
+('A', 'COMP3258', '1970-06-05 14:30', '1970-06-05 15:20', 1, 'MB167', 'Welcome to COMP3258!', 'TBC')
 ;
 
 INSERT INTO SubclassEvent VALUES

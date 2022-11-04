@@ -21,10 +21,11 @@ CREATE TABLE Subclass (
     course_id VARCHAR(100) NOT NULL,
     stime TIMESTAMP NOT NULL,
     etime TIMESTAMP NOT NULL,
+    repeat_weekly TINYINT NOT NULL DEFAULT 1,
     class_loca VARCHAR(100) NOT NULL,
     teacher_message VARCHAR(800) NOT NULL,
     zoom_link VARCHAR(500) NOT NULL,
-    PRIMARY KEY(subclass_id, course_id, stime, etime),
+    PRIMARY KEY(subclass_id, course_id, stime, etime, repeat_weekly),
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
