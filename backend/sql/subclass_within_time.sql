@@ -38,7 +38,7 @@ from
                 ) SC
             having
                 curr_time < star_time
-                and curr_time > star_time - 111
+                and curr_time > star_time - __TIME_RANGE__
         )
         UNION
         (
@@ -63,7 +63,7 @@ from
                         ) SC
                     having
                         curr_time < star_time
-                        and curr_time > date_add(SC.stime, interval - 40 * 60 second)
+                        and curr_time > date_add(SC.stime, interval - __TIME_RANGE__ second)
                 ) class_comming_one_time
         )
     ) class_comming;

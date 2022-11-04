@@ -31,8 +31,6 @@ app.add_middleware(
 db_connector = mysql.connector.connect(user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
 db_cursor = db_connector.cursor()
 
-# TODO: remove demo
-
 # Utility setup
 def db_select(query: str):
     db_cursor.execute(query)
