@@ -47,7 +47,7 @@ def db_exe_file(path: str, modifier):
     return result
 
 hours = 1
-print(db_exe_file(R'backend\sql\subclass_within_time.sql', lambda s : s.replace("__TIME_RANGE__", "60 * 60 * {}".format(hours))))
+print(db_exe_file(R'backend\sql\subclass_within_time.sql', lambda s : s.replace("__TIME_RANGE__", "'{}:0:0'".format(hours))))
 
 @app.get("/", tags=["root"], response_class=HTMLResponse)
 async def read_root() -> dict:
