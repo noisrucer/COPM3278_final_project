@@ -7,7 +7,12 @@ import configparser
 
 # Configs
 config = configparser.ConfigParser()
-config.read('backend/backend.ini')
+try:
+    with open('backend/backend.ini') as f:
+        config.read_file(f)
+except IOError:
+    raise ValueError('Please modify and copy backend.ini to backend/backend.ini')
+
 print("Config:", {section: dict(config[section]) for section in config.sections()})
 
 # Server setup
