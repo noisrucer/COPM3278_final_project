@@ -3,7 +3,7 @@ INSERT INTO Student VALUES
 ('3035555626', 'Yonghyun Kwon', 'M', 24, "u3555562@connect.hku.hk"),
 ('3035604075', 'Yeon Park', 'M',23, "pyeon99@gmail.com"),
 ('3035729423', 'Jungan Choi','F',22, "junganchoi26@gmail.com"),
-('3035786603', 'Lo Yu Sum', 'M', 20, "loyusum246807952@gmail.com")
+('3035786603', 'Lo Yu Sum', 'M', 20, "loyusum246807952@gmail.com");
 
 
 INSERT INTO Course VALUES
@@ -13,31 +13,38 @@ INSERT INTO Course VALUES
 ('COMP3258', 'Functional Programming', 'The course teaches the basics of functional programming using the language Haskell. The main goal is introduce students to fundamental programming concepts such as recursion, abstraction, lambda expressions and higher-order functions and data types. The course will also study the mathematical reasoning involved in the design of functional programs and techniques for proving properties about functions so defined. With the adoption of lambda expressions recent versions of Java, C++ or C#, functional programming and related programming techniques are becoming increasingly more relevant even for programmers of languages that are not traditionally viewed as functional. This course is important to introduce students to such techniques.');
 
 INSERT INTO Subclass VALUES
-('A', 'COMP3278', '1970-06-01 14:30', '1970-06-01 15:20', 1, 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3278', '1970-06-04 13:30', '1970-06-04 15:20', 1, 'MWT2', 'Welcome to COMP3278!', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 1, 'CPD-LG.01', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
-('A', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 1, 'CYPP2', 'Welcome to COMP3230A!', 'No static address, let''s discuss which one to choose'),
-('B', 'COMP3230', '1970-06-02 10:30', '1970-06-02 12:20', 1, 'TBC', 'Welcome to COMP3230B!', 'TBC'),
-('B', 'COMP3230', '1970-06-04 10:30', '1970-06-04 12:20', 1, 'TBC', 'Welcome to COMP3230B!', 'TBC'),
-('A', 'COMP3330', '1970-06-01 12:30', '1970-06-01 14:20', 1, 'LE4', 'Welcome to COMP3330!', 'TBC'),
-('A', 'COMP3330', '1970-06-04 12:30', '1970-06-04 13:20', 1, 'LE4', 'Welcome to COMP3330!', 'TBC'),
-('A', 'COMP3258', '1970-06-02 13:30', '1970-06-02 15:20', 1, 'MB167', 'Welcome to COMP3258!', 'TBC'),
-('A', 'COMP3258', '1970-06-05 14:30', '1970-06-05 15:20', 1, 'MB167', 'Welcome to COMP3258!', 'TBC')
+('A', 'COMP3278', 'Welcome to COMP3278!'),
+('A', 'COMP3230', 'Welcome to COMP3230A!'),
+('B', 'COMP3230', 'Welcome to COMP3230B!'),
+('A', 'COMP3330', 'Welcome to COMP3330!'),
+('A', 'COMP3258', 'Welcome to COMP3258!')
 ;
+
+INSERT INTO SubclassInfo VALUES
+(1, 'A', 'COMP3278', 'Monday', '14:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+(2, 'A', 'COMP3278', 'Thursday', '13:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+(1, 'A', 'COMP3230', 'Tuesday', '10:30', '12:20', 'CPD-LG.01', 'No static address, let''s discuss which one to choose'),
+(2, 'A', 'COMP3230', 'Thursday', '10:30', '12:20', 'CYPP2', 'No static address, let''s discuss which one to choose'),
+(1, 'B', 'COMP3230', 'Tuesday', '10:30', '12:20', 'TBC', 'TBC'),
+(2, 'B', 'COMP3230', 'Thursday', '10:30', '12:20', 'TBC', 'TBC'),
+(1, 'A', 'COMP3330', 'Monday', '12:30', '14:20', 'LE4', 'TBC'),
+(2, 'A', 'COMP3330', 'Thursday', '12:30', '13:20', 'LE4', 'TBC'),
+(1, 'A', 'COMP3258', 'Tuesday', '13:30', '15:20', 'MB167', 'TBC'),
+(2, 'A', 'COMP3258', 'Friday', '14:30', '15:20', 'MB167', 'TBC'),
+(3, 'A', 'COMP3258', 'Friday', '23:30', '23:20', 'MB167', 'TBC');
 
 INSERT INTO SubclassEvent VALUES
-(0, 'COMP3278', 'A', 'assignment', 'Assignment 1', 'www.comp3278asg1.com'),
-(1, 'COMP3278', 'A', 'assignment', 'Assignment 3', 'www.comp3278asg3.com'),
-(2, 'COMP3278', 'A', 'lecture_note', 'Lecture 1', 'www.comp3278lec1.com'),
-(3, 'COMP3278', 'A', 'tutorial_note', 'Tutorial 2', 'www.comp3278tuto2.com'),
-(4, 'COMP3278', 'A', 'quiz', 'Quiz 1', 'www.comp3278quiz1.com'),
-(5, 'COMP3230', 'A', 'lecture_note', 'Lecture 3', 'www.comp3230Alec1.com'),
-(6, 'COMP3230', 'B', 'lecture_note', 'Lecture 3', 'www.comp3230Blec1.com'),
-(7, 'COMP3330', 'A', 'assignment', 'Assignment 7', 'www.comp3330asg7.com'),
-(8, 'COMP3258', 'A', 'quiz', 'Quiz 2', 'www.comp3258quiz2.com'),
-(9, 'COMP3258', 'A', 'tutorial_note', 'Tutorial 5', 'www.comp3258tuto5.com')
+(0, 'COMP3278', 'A', 'assignment', 'Assignment 1', 'www.comp3278asg1.com', '2022-11-4 12:00', NULL),
+(1, 'COMP3278', 'A', 'assignment', 'Assignment 3', 'www.comp3278asg3.com', '2022-11-4 12:00', NULL),
+(2, 'COMP3278', 'A', 'lecture_note', 'Lecture 1', 'www.comp3278lec1.com', '2022-11-4 12:00', NULL),
+(3, 'COMP3278', 'A', 'tutorial_note', 'Tutorial 2', 'www.comp3278tuto2.com', '2022-11-4 12:00', NULL),
+(4, 'COMP3278', 'A', 'quiz', 'Quiz 1', 'www.comp3278quiz1.com', '2022-11-4 12:00', NULL),
+(5, 'COMP3230', 'A', 'lecture_note', 'Lecture 3', 'www.comp3230Alec1.com', '2022-11-4 12:00', NULL),
+(6, 'COMP3230', 'B', 'lecture_note', 'Lecture 3', 'www.comp3230Blec1.com', '2022-11-4 12:00', NULL),
+(7, 'COMP3330', 'A', 'assignment', 'Assignment 7', 'www.comp3330asg7.com', '2022-11-4 12:00', NULL),
+(8, 'COMP3258', 'A', 'quiz', 'Quiz 2', 'www.comp3258quiz2.com', '2022-11-4 12:00', NULL),
+(9, 'COMP3258', 'A', 'tutorial_note', 'Tutorial 5', 'www.comp3258tuto5.com', '2022-11-4 12:00', NULL)
 ;
-
 
 --if a student is already enrolled in course, can't enrolled in another subclass --
 INSERT INTO StudentEnrollsSubclass VALUES
