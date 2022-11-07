@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
-import mysql.connector
 import configparser
 
+class Item(BaseModel):
+    name: str
 # Configs
 config = configparser.ConfigParser()
 config.read('backend/backend.ini')
@@ -27,28 +29,11 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# Database setup
-db_connector = mysql.connector.connect(user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
-db_cursor = db_connector.cursor()
 
-# TODO: remove demo
-db_cursor.execute('select * from Course')
-values = db_cursor.fetchall()
-print(values)
-print("finish executing...")
+#Checks if the img is sent correctly 
+@app.post("/server")
+async def post_data(item: Item):
+    print(item)
+    print('Item Received!')
+    return item
 
-@app.get("/", tags=["root"], response_class=HTMLResponse)
-async def read_root() -> dict:
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>COMP3278 ICMS</title>
-    </head>
-    <body>
-        <h1>Empty</h1>
-    </body>
-    </html>
-    """
