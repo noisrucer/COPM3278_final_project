@@ -18,10 +18,11 @@ CREATE TABLE Subclass (
     subclass_id VARCHAR(100) NOT NULL,
     course_id VARCHAR(100) NOT NULL,
     teacher_message VARCHAR(800) NOT NULL,
-    PRIMARY KEY(subclass_id, course_id, stime, etime, repeat_weekly),
+    PRIMARY KEY(subclass_id, course_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
+--Assume no class at 00:00--
 CREATE TABLE SubclassInfo (
     subclass_info_id INT NOT NULL,
     subclass_id VARCHAR(100) NOT NULL,
