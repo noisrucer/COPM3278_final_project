@@ -21,7 +21,7 @@ pip install fastapi "uvicorn[standard]" mysql-connector-python
 python .\backend\main.py
 ```
 
-### Frontend timetable required packages
+### Frontend timetable required packages (For yarn)
 
 ``` shell
 yarn add react-big-calendar react-datepicker date-fns
