@@ -2,6 +2,7 @@ select
     concat(C.course_id, SC.subclass_id),
     C.name,
     C.description,
+    SC.teacher_message,
     SCI.stime,
     SCI.etime,
     SCI.class_loca,
