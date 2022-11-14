@@ -1,4 +1,5 @@
 import json
+from backend.email.email_api import EmailSender
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -41,6 +42,10 @@ db_connector = mysql.connector.connect(
     user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
 db_cursor = db_connector.cursor()
 
+# Email setup
+email_sender = EmailSender(
+    config["GmailService"]["email"], config["GmailService"]["application-password"])
+
 # Utility setup
 
 
@@ -70,9 +75,9 @@ def get_course_info(course_id: str, subclass_id: str, subclass_info_id: int):
                        lambda s: s.replace("__SUBCLASS_ID__", "'{}'".format(subclass_id)).replace('__COURSE_ID__',
                                                                                                   "'{}'".format(course_id)).replace('__SUBCLASS_INFO_ID__', str(subclass_info_id)))
 
-@app.get("/coming_course/{token}", response_class=JSONResponse)
-async def read_root(token: str) -> dict:
-    courses = get_course_within_hours(token, 5)[0]
+
+def get_coming_course_info(token, hours: int):
+    courses = get_course_within_hours(token, hours)[0]
     if len(courses) > 0:
         courses = courses[0]
         course_info = get_course_info(
@@ -85,17 +90,43 @@ async def read_root(token: str) -> dict:
                 "CourseID": course_info[0],
                 "CourseName":  course_info[1],
                 "CourseDescription":  course_info[2],
-                "CourseStartTime": course_info[3],
-                "CourseEndTime": course_info[4],
-                "CourseLocation": course_info[5],
-                "CourseZoomLink": course_info[6]
+                "TeacherMessage": course_info[3],
+                "CourseStartTime": course_info[4],
+                "CourseEndTime": course_info[5],
+                "CourseLocation": course_info[6],
+                "CourseZoomLink": course_info[7]
             }
 
     return {}
 
 
+@app.get("/coming_course/{token}", response_class=JSONResponse)
+async def coming_course(token: str) -> dict:
+    return get_coming_course_info(token, 23)
+
+
+@app.post("/send_course_info")
+async def send_course_info(token: str) -> dict:
+    info = get_coming_course_info(token, 23)
+    print(info)
+    if len(info) > 0:
+
+        with open("backend/email/email-content.html") as f:
+
+            email_content = f.read().replace('\n', '')
+
+            arr = [info["CourseID"], info["CourseLocation"],
+                info["TeacherMessage"], info["CourseZoomLink"]]
+            email_content = email_content.replace(
+                '__COURSE_INFO__', '<tr>' + ''.join(['<td>' + _ + '</td>' for _ in arr]) + '</tr>')
+
+            email_content = email_content.replace('__COURSE_MATERIALS__', "")
+
+            email_sender.send_email("loyusum246807952@gmail.com", email_content)
+
+
 @app.get("/", tags=["root"], response_class=HTMLResponse)
-async def read_root() -> dict:
+async def read_root():
     return """
     <!DOCTYPE html>
     <html>

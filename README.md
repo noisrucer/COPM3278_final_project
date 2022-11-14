@@ -18,5 +18,5 @@ pip install fastapi "uvicorn[standard]" mysql-connector-python
 ### Start backend by
 
 ``` shell
-python .\backend\main.py
+python -m backend.main
 ```
