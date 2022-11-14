@@ -33,7 +33,7 @@ cp backend.ini backend/backend.ini
 ### Start backend by
 
 ```shell
-uvicorn backend.app.api:app --reload
+python -m backend.main
 ```
 
 ### To train face recognition model

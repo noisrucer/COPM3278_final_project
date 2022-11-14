@@ -2,6 +2,7 @@ import smtplib
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from backend.app.config import config
 
 
 class EmailSender:
@@ -34,3 +35,6 @@ class EmailSender:
 
         self.smtp.quit()
         pass
+
+email_sender = EmailSender(
+    config["GmailService"]["email"], config["GmailService"]["application-password"])

@@ -12,6 +12,8 @@ from .crud import get_course_within_hours, get_course_info
 
 from .routers import auth
 
+from backend.email.email_api import email_sender
+
 # Configs
 # config = configparser.ConfigParser()
 # try:
@@ -48,13 +50,7 @@ app.add_middleware(
 #     user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
 # db_cursor = db_connector.cursor()
 
-# Email setup
-email_sender = EmailSender(
-    config["GmailService"]["email"], config["GmailService"]["application-password"])
-
 # Utility setup
-
-
 # def db_select(query: str):
 #     db_cursor.execute(query)
 #     return db_cursor.fetchall()
