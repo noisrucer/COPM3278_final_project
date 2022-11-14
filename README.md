@@ -43,13 +43,13 @@ uvicorn backend.app.api:app --reload
 3. Start capturing your faces by
 
 ```shell
-python3 FaceRecognition/face_capture.py
+python FaceRecognition/face_capture.py
 ```
 
 4. Train the model by
 
 ```shell
-python3 FaceRecognition/train.py
+python FaceRecognition/train.py
 ```
 
 5. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
