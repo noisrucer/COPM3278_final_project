@@ -28,7 +28,7 @@ class FaceRecognizer:
         self.cursor = db_conn.cursor
 
         # Define camera and detect face
-        self.face_cascade = cv2.CascadeClassifier('./haarcascade/haarcascade_frontalface_default.xml')
+        self.face_cascade = cv2.CascadeClassifier('haarcascade/haarcascade_frontalface_default.xml')
         self.setup()
 
     def setup(self):
