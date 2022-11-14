@@ -6,21 +6,27 @@ from fastapi.responses import JSONResponse
 
 import mysql.connector
 import configparser
+from .db import db_cursor, db_select, db_exe_file
+from .crud import get_course_within_hours, get_course_info
+
+from .routers import auth
 
 # Configs
-config = configparser.ConfigParser()
-try:
-    with open('backend/backend.ini') as f:
-        config.read_file(f)
-except IOError:
-    raise ValueError(
-        'Please modify and copy backend.ini to backend/backend.ini')
+# config = configparser.ConfigParser()
+# try:
+#     with open('backend/backend.ini') as f:
+#         config.read_file(f)
+# except IOError:
+#     raise ValueError(
+#         'Please modify and copy backend.ini to backend/backend.ini')
 
-print("Config:", {section: dict(config[section])
-      for section in config.sections()})
+# print("Config:", {section: dict(config[section])
+#       for section in config.sections()})
 
 # Server setup
 app = FastAPI()
+
+app.include_router(auth.router)
 
 origins = [
     "http://localhost:3000",
@@ -36,39 +42,39 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-# Database setup
-db_connector = mysql.connector.connect(
-    user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
-db_cursor = db_connector.cursor()
+# # Database setup
+# db_connector = mysql.connector.connect(
+#     user=config['Database']['user'], password=config['Database']['password'], database=config['Database']['database'])
+# db_cursor = db_connector.cursor()
 
 # Utility setup
 
 
-def db_select(query: str):
-    db_cursor.execute(query)
-    return db_cursor.fetchall()
+# def db_select(query: str):
+#     db_cursor.execute(query)
+#     return db_cursor.fetchall()
 
 
-def db_exe_file(path: str, modifier):
-    result = []
-    with open(path, 'r') as f:
-        results = db_cursor.execute(modifier(f.read()), multi=True)
-        for cur in results:
-            if cur.with_rows:
-                result.append(cur.fetchall())
+# def db_exe_file(path: str, modifier):
+#     result = []
+#     with open(path, 'r') as f:
+#         results = db_cursor.execute(modifier(f.read()), multi=True)
+#         for cur in results:
+#             if cur.with_rows:
+#                 result.append(cur.fetchall())
 
-    return result
-
-
-def get_course_within_hours(token: str, hours: int):
-    return db_exe_file(R'backend\sql\subclass_within_time.sql',
-                       lambda s: s.replace("__TIME_RANGE__", "'{}:0:0'".format(hours)).replace("__TOKEN__", "'{}'".format(token)))
+#     return result
 
 
-def get_course_info(course_id: str, subclass_id: str, subclass_info_id: int):
-    return db_exe_file(R'backend\sql\course_info.sql',
-                       lambda s: s.replace("__SUBCLASS_ID__", "'{}'".format(subclass_id)).replace('__COURSE_ID__',
-                                                                                                  "'{}'".format(course_id)).replace('__SUBCLASS_INFO_ID__', str(subclass_info_id)))
+# def get_course_within_hours(token: str, hours: int):
+#     return db_exe_file(R'backend\sql\subclass_within_time.sql',
+#                        lambda s: s.replace("__TIME_RANGE__", "'{}:0:0'".format(hours)).replace("__TOKEN__", "'{}'".format(token)))
+
+
+# def get_course_info(course_id: str, subclass_id: str, subclass_info_id: int):
+#     return db_exe_file(R'backend\sql\course_info.sql',
+#                        lambda s: s.replace("__SUBCLASS_ID__", "'{}'".format(subclass_id)).replace('__COURSE_ID__',
+#                                                                                                   "'{}'".format(course_id)).replace('__SUBCLASS_INFO_ID__', str(subclass_info_id)))
 
 @app.get("/coming_course/{token}", response_class=JSONResponse)
 async def read_root(token: str) -> dict:

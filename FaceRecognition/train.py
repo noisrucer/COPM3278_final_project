@@ -37,7 +37,7 @@ for root, dirs, files in os.walk(image_dir):
             image_array = np.array(pil_image, "uint8")
             print(image_array)
             # Using multiscle detection
-            faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
+            faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
 
             for (x, y, w, h) in faces:
                 roi = image_array[y:y+h, x:x+w]
@@ -52,4 +52,4 @@ with open("./labels.pickle", "wb") as f:
 
 # Train the recognizer and save the trained model.
 recognizer.train(x_train, np.array(y_label))
-recognizer.save("./train.yml")
+recognizer.write("./train.yml")

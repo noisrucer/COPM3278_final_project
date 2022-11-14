@@ -6,36 +6,39 @@ import pyttsx3
 import pickle
 from datetime import datetime
 import sys
-from db_connector import DBConnector
+from uuid import uuid4
+# from db_connector import DBConnector
 
-# 1 Create database connection
-db_conn = DBConnector(
-    host="localhost",
-    user="root",
-    password="Ckdwls1541*",
-    database="comp3278_fp"
-)
+# # 1 Create database connection
+# db_conn = DBConnector(
+#     host="localhost",
+#     user="root",
+#     password="Ckdwls1541*",
+#     database="comp3278_fp"
+# )
+WEIGHT_PATH = "./train.yml"
+LABELS_PATH = "FaceRecognition/labels.pickle"
 
 class FaceRecognizer:
-    def __init__(self, weight_path, labels_path, db_conn, conf_thresh=60):
-        self.weight_path = weight_path
-        self.labels_path = labels_path
+    def __init__(self, db_conn, db_cursor, conf_thresh=60):
         self.conf_thresh = conf_thresh
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
+        self.recognizer.read("FaceRecognition/train.yml")
+        self.cursor = db_cursor
         self.engine = pyttsx3.init()
         self.labels = {}
         self.rate = None
-        self.cursor = db_conn.cursor
 
         # Define camera and detect face
-        self.face_cascade = cv2.CascadeClassifier('haarcascade/haarcascade_frontalface_default.xml')
+        self.face_cascade = cv2.CascadeClassifier('/Users/jasonlee/Desktop/HKU/COMP3278/COPM3278_final_project/FaceRecognition/haarcascade/haarcascade_frontalface_default.xml')
         self.setup()
+        
 
     def setup(self):
-        self.recognizer.read(self.weight_path)
-        with open(self.labels_path, "rb") as f:
-            labels = pickle.load(f)
-            labels = {v: k for k, v in labels.items()}
+        
+        with open(LABELS_PATH, "rb") as f:
+            self.labels = pickle.load(f)
+            self.labels = {v: k for k, v in self.labels.items()}
 
         self.rate = self.engine.getProperty("rate")
         self.engine.setProperty('rate', 175)
@@ -45,20 +48,25 @@ class FaceRecognizer:
         '''
         img: numpy RGB array
         '''
+        response_msg = None
 
         gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-        faces = self.face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
+        print(gray)
+        faces = self.face_cascade.detectMultiScale(gray)
         print(faces)
 
         for (x, y, w, h) in faces:
             roi_gray = gray[y:y + h, x:x + w]
             roi_color = img[y:y + h, x:x + w]
+            print(roi_gray)
+            print(roi_gray.shape)
+            
             # predict the id and confidence for faces
             id_, conf = self.recognizer.predict(roi_gray)
 
             # If the face is recognized
             print(conf)
-
+            
             if conf > self.conf_thresh:
                 # print(id_)
                 # print(labels[id_])
@@ -76,19 +84,33 @@ class FaceRecognizer:
                 select = "SELECT student_id, name, gender, age FROM Student WHERE name='%s'" % (name)
                 name = self.cursor.execute(select)
                 result = self.cursor.fetchall()
-                # print(result)
                 data = "error"
 
                 for x in result:
                     data = x
 
+                
                 # If the student's information is not found in the database
                 if data == "error":
-                    print("The student", current_name, "is NOT FOUND in the database.")
+                    student_not_found_msg = f"The student", {current_name}, "is NOT FOUND in the database."
+                    response_msg = {
+                        "status": "fail",
+                        "message": student_not_found_msg,
+                        "data": None
+                    }
 
                 # If the student's information is found in the database
                 else:
-                    print(result)
+                    hello = f"Hello, {current_name}, You did attendance today"
+                    response_msg = {
+                        "status": "success",
+                        "message": hello,
+                        "data": {
+                            "login_status": "success",
+                            "student_id": data[0],
+                            "login_token": uuid4()
+                        }
+                    }
                     """
                     Implement useful functions here.
                     Check the course and classroom for the student.
@@ -112,6 +134,11 @@ class FaceRecognizer:
                     #  engine.say(hello)
                     # engine.runAndWait()
             else:
+                response_msg = {
+                        "status": "fail",
+                        "message": "Failed to recognize face",
+                        "data": None
+                    }
                 color = (255, 0, 0)
                 stroke = 2
                 font = cv2.QT_FONT_NORMAL
@@ -121,6 +148,8 @@ class FaceRecognizer:
                 print(hello)
                 #  self.engine.say(hello)
                 # engine.runAndWait()
+                
+        return response_msg
 
 
 
