@@ -1,7 +1,7 @@
 select
     SI.subclass_id,
     SI.course_id,
-    SI.subclass_info_id,
+    SI.week_day,
     SI.stime
 from
     SubclassInfo SI,

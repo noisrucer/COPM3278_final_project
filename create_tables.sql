@@ -1,3 +1,4 @@
+-- Active: 1667214464632@@127.0.0.1@3306@comp3278_fp
 CREATE TABLE Student (
     student_id VARCHAR(100) NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -24,7 +25,6 @@ CREATE TABLE Subclass (
 
 --Assume no class at 00:00--
 CREATE TABLE SubclassInfo (
-    subclass_info_id INT NOT NULL,
     subclass_id VARCHAR(100) NOT NULL,
     course_id VARCHAR(100) NOT NULL,
     week_day VARCHAR(100) NOT NULL,
@@ -32,13 +32,13 @@ CREATE TABLE SubclassInfo (
     etime VARCHAR(100) NOT NULL,
     class_loca VARCHAR(100) NOT NULL,
     zoom_link VARCHAR(500) NOT NULL,
-    PRIMARY KEY(subclass_id, course_id, subclass_info_id),
+    PRIMARY KEY(subclass_id, course_id, week_day),
     FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
 CREATE TABLE SubclassEvent(
-    subclass_event_id INT NOT NULL,
+    subclass_event_id INT NOT NULL AUTO_INCREMENT,
     course_id VARCHAR(100) NOT NULL, 
     subclass_id VARCHAR(100) NOT NULL,
     type ENUM('lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE StudentEnrollsSubclass(
 );
 
 CREATE TABLE Logging(
-    logging_id INT NOT NULL,
+    logging_id INT NOT NULL AUTO_INCREMENT,
     student_id VARCHAR(100) NOT NULL,
     login_time DATETIME NOT NULL,
     logout_time DATETIME,
@@ -73,7 +73,7 @@ CREATE TABLE Logging(
 );
 
 CREATE TABLE EmailActivity(
-    email_activity_id INT NOT NULL  ,
+    email_activity_id INT NOT NULL AUTO_INCREMENT,
     student_id VARCHAR(100) NOT NULL,
     course_id VARCHAR(100) NOT NULL,
     subclass_id VARCHAR(100) NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE EmailActivity(
 );
 
 CREATE TABLE RedirectionActivity(
-    redirection_activity_id INT NOT NULL,
+    redirection_activity_id INT NOT NULL AUTO_INCREMENT,
     student_id VARCHAR(100) NOT NULL,
     type ENUM('zoom_link', 'lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
     action_date DATETIME NOT NULL,

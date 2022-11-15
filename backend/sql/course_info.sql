@@ -17,4 +17,4 @@ where
     and SC.course_id = __COURSE_ID__
     and SCI.course_id = SC.course_id
     and SCI.subclass_id = SC.subclass_id
-    and SCI.subclass_info_id = __SUBCLASS_INFO_ID__;
+    and SCI.week_day = __SUBCLASS_INFO_WEEK_DAY__;

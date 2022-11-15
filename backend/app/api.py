@@ -83,7 +83,7 @@ def get_coming_course_info(token, hours: int):
     if len(courses) > 0:
         courses = courses[0]
         course_info = get_course_info(
-            courses[1], courses[0], int(courses[2]))[0]
+            courses[1], courses[0], courses[2])[0]
         if len(course_info) > 0:
             course_info = course_info[0]
             print(json.dumps(course_info, sort_keys=True,
