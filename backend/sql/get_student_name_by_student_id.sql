@@ -1,0 +1,1 @@
+SELECT S.name FROM Student S WHERE S.student_id = __STUDENT_ID__;

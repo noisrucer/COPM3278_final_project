@@ -23,6 +23,7 @@ CREATE TABLE Subclass (
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
+
 --Assume no class at 00:00--
 CREATE TABLE SubclassInfo (
     subclass_id VARCHAR(100) NOT NULL,
