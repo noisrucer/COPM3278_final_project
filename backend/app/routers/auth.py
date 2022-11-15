@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import io
 from pydantic import BaseModel
+from datetime import datetime
 
 from fastapi import APIRouter, Depends
 
@@ -43,6 +44,10 @@ async def login(login_input: LoginIn):
         return json_response
     
     json_response.update(**response_msg['data'])
+    current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    sql = f"INSERT INTO Logging (logging_id, student_id, login_time, logout_time, login_token) VALUES (NULL, '{json_response['student_id']}', '{current_time}', NULL, '{json_response['login_token']}');"
+    db_cursor.execute(sql)
+    db_connector.commit()
     
     return json_response
     
