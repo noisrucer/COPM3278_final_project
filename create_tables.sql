@@ -81,7 +81,7 @@ CREATE TABLE EmailActivity(
     action_date DATETIME NOT NULL,
     PRIMARY KEY(email_activity_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id),
-    FOREIGN KEY(subclass_id) REFERENCES StudentEnrollsSubclass(subclass_id),
+    FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
 );
 
