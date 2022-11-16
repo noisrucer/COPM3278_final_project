@@ -1,5 +1,6 @@
 select
-    concat(C.course_id, SC.subclass_id),
+    C.course_id,
+    SC.subclass_id,
     C.name,
     C.description,
     SC.teacher_message,

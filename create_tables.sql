@@ -38,6 +38,7 @@ CREATE TABLE SubclassInfo (
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
+
 CREATE TABLE SubclassEvent(
     subclass_event_id INT NOT NULL AUTO_INCREMENT,
     course_id VARCHAR(100) NOT NULL, 
@@ -52,6 +53,7 @@ CREATE TABLE SubclassEvent(
     FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id)
 );
 
+
 CREATE TABLE StudentEnrollsSubclass(
     course_id VARCHAR(100) NOT NULL,
     subclass_id VARCHAR(100) NOT NULL,
@@ -62,6 +64,7 @@ CREATE TABLE StudentEnrollsSubclass(
     FOREIGN KEY(student_id) REFERENCES Student(student_id),
     FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id)
 );
+
 
 CREATE TABLE Logging(
     logging_id INT NOT NULL AUTO_INCREMENT,
@@ -81,7 +84,7 @@ CREATE TABLE EmailActivity(
     action_date DATETIME NOT NULL,
     PRIMARY KEY(email_activity_id),
     FOREIGN KEY(course_id) REFERENCES Course(course_id),
-    FOREIGN KEY(subclass_id) REFERENCES StudentEnrollsSubclass(subclass_id),
+    FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
 );
 

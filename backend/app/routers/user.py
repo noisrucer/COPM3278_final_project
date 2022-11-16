@@ -3,6 +3,10 @@ from fastapi.responses import JSONResponse
 import json
 from .. import crud
 from collections import OrderedDict
+from pydantic import BaseModel
+from datetime import datetime
+
+from backend.email.email_api import email_sender
 
 router = APIRouter(
     prefix="/user",
@@ -70,21 +74,30 @@ async def get_coming_course_by_token(login_token: str):
     # If there's a class within 1 hour
     if len(courses) > 0:
         courses = courses[0]
+        week_day = courses[2]
         course_info = crud.get_course_info(
             courses[1], courses[0], courses[2])[0]
         if len(course_info) > 0:
             course_info = course_info[0]
-            print(json.dumps(course_info, sort_keys=True,
-                  indent=4, separators=(',', ': '), default=str))
+            json.dumps(course_info, sort_keys=True,
+                  indent=4, separators=(',', ': '), default=str)
+            
+            course_id, subclass_id = course_info[0], course_info[1]
+            course_events = crud.get_course_event(course_id, subclass_id)[0]
+            
+            
             return {
+                "CourseEvents": course_events,
+                "week_day": week_day,
                 "CourseID": course_info[0],
-                "CourseName":  course_info[1],
-                "CourseDescription":  course_info[2],
-                "TeacherMessage": course_info[3],
-                "CourseStartTime": course_info[4],
-                "CourseEndTime": course_info[5],
-                "CourseLocation": course_info[6],
-                "CourseZoomLink": course_info[7]
+                "SubclassID": course_info[1],
+                "CourseName":  course_info[2],
+                "CourseDescription":  course_info[3],
+                "TeacherMessage": course_info[4],
+                "CourseStartTime": course_info[5],
+                "CourseEndTime": course_info[6],
+                "CourseLocation": course_info[7],
+                "CourseZoomLink": course_info[8]
             }
 
     # If there's no class within 1 hour - return weekly timetable info
@@ -98,5 +111,104 @@ async def get_coming_course_by_token(login_token: str):
         response_timetable_courses['timetable'].items(), key=lambda item: week_days_sort_key.index(item[0])
     ))
     
-    
     return response_timetable_courses
+
+
+class EmailUserInput(BaseModel):
+    student_id: str
+    course_id: str
+    subclass_id: str
+    week_day: str
+
+
+@router.post('/email_course_info')
+async def send_course_info_by_email(email_user_input: EmailUserInput):
+    print("RECEIVED")
+    student_id = email_user_input.student_id
+    course_id = email_user_input.course_id
+    subclass_id = email_user_input.subclass_id
+    week_day = email_user_input.week_day
+    
+    student_email = crud.get_student_email_by_student_id(student_id)[0][0][0]
+    
+    course_info = crud.get_course_info(
+            course_id, subclass_id, week_day)[0][0]
+    
+    detail = {
+                "CourseID": course_info[0],
+                "SubclassID": course_info[1],
+                "CourseName":  course_info[2],
+                "CourseDescription":  course_info[3],
+                "TeacherMessage": course_info[4],
+                "CourseStartTime": course_info[5],
+                "CourseEndTime": course_info[6],
+                "CourseLocation": course_info[7],
+                "CourseZoomLink": course_info[8]
+            }
+    
+    course_events = crud.get_course_event(course_id, subclass_id)[0]
+    course_events_html = ""
+    for evt in course_events:
+        type = evt[2]
+        title = evt[3]
+        evt_link = evt[4]
+        upload_time = evt[5]
+        deadline = evt[6] if evt[6] else "TBC"
+        
+        evt_html = f"""
+            <div class="course-event">
+                <p><b class="red">{title}</b></p>
+                <p><b>Type: </b>{type}</p>
+                <p><b>Uploaded Time: </b>{upload_time}</p>
+                <p><b>Deadline: </b>{deadline}</p>
+                <p><b>Link: </b> <a href="{detail['CourseZoomLink']}">{evt_link}</a></p>
+            </div>
+        """
+        
+        course_events_html += evt_html
+    
+    with open('backend/email/email-content.html') as f:
+        email_content = f.read().replace('\n', '')
+        course_full_code = detail["CourseID"] + detail["SubclassID"]
+        start_time = detail['CourseStartTime'] + ":00"
+        start_hr, start_min = int(start_time.split(':')[0]), int(start_time.split(':')[1])
+        current_time = datetime.now().strftime("%H:%M:%S")
+        cur_hr, cur_min = int(current_time.split(':')[0]), int(current_time.split(':')[1])
+        
+        # if next day
+        
+        # if same day
+        time_left = start_hr * 60 + start_min - cur_hr * 60 - cur_min
+        
+        
+        email_content = email_content.replace(
+            "__COURSE_FULL_CODE__", course_full_code
+        ).replace(
+            "__COURSE_LOCATION__", detail['CourseLocation']
+        ).replace(
+            "__COURSE_START_TIME__", detail['CourseStartTime']
+        ).replace(
+            "__COURSE_END_TIME__", detail['CourseEndTime']
+        ).replace(
+            "__COURSE_ZOOM_LINK__", detail['CourseZoomLink']
+        ).replace(
+            "__TIME_LEFT__", str(time_left)
+        ).replace(
+            "__TEACHER_MESSAGE__", detail['TeacherMessage']
+        ).replace(
+            "__COURSE_DESCRIPTION__", detail['CourseDescription']
+        ).replace(
+            "__COURSE_EVENTS__", course_events_html
+        )
+        
+        # email_content += course_events_html
+    print(email_content)
+    email_sender.send_email(
+        student_email, email_content, course_full_code
+    )
+    
+    action_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    crud.create_email_activity(student_id, course_id, subclass_id, action_date)
+    
+    
+    return {"message": "Message sent to {student_email}"}

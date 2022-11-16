@@ -23,3 +23,25 @@ def get_student_id_by_token(token: str):
 def get_student_name_by_student_id(student_id: str):
     return db_exe_file('backend/sql/get_student_name_by_student_id.sql',
                        lambda s: s.replace("__STUDENT_ID__", "'{}'".format(student_id)))
+    
+def get_course_event(course_id: str, subclass_id: str):
+    return db_exe_file('backend/sql/get_subclass_event.sql',
+                       lambda s: s.replace("__COURSE_ID__", "'{}'".format(course_id)).replace("__SUBCLASS_ID__", "'{}'".format(subclass_id)))
+    
+def get_student_email_by_student_id(student_id: str):
+    return db_exe_file('backend/sql/get_student_email_by_student_id.sql',
+                       lambda s: s.replace("__STUDENT_ID__", "'{}'".format(student_id)))
+    
+def create_email_activity(student_id, course_id, subclass_id, action_date):
+    return db_exe_file('backend/sql/create_email_activity.sql',
+                       lambda s: s.replace(
+                           "__STUDENT_ID__", "'{}'".format(student_id)
+                           ).replace(
+                               "__COURSE_ID__", "'{}'".format(course_id)
+                           ).replace(
+                               "__SUBCLASS_ID__", "'{}'".format(subclass_id)
+                           ).replace(
+                               "__ACTION_DATE__", "'{}'".format(action_date)
+                           )
+                       )
+                       

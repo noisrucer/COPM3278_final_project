@@ -19,12 +19,12 @@ class EmailSender:
 
         pass
 
-    def send_email(self, to_email, html_content):
+    def send_email(self, to_email, html_content, course_full_code):
         try:
             content = MIMEMultipart()
-            content["subject"] = "ICMS upcoming course detail"
+            content["subject"] = f"ICMS upcoming course detail for {course_full_code}"
             content["from"] = self.email
-            content["to"] = "loyusum246807952@gmail.com"
+            content["to"] = to_email
             content.attach(MIMEText(html_content, "html"))
 
             self.smtp.send_message(content)

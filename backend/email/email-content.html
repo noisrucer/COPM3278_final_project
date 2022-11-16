@@ -22,27 +22,53 @@
       tr:nth-child(even) {
         background-color: #dddddd;
       }
+
+      .course-event {
+        border: 1px solid;
+        padding: 5px;
+        padding-left: 10px;
+        width: 300px;
+      }
+
+      .red {
+        color: red;
+        font-size: 25px;
+      }
     </style>
   </head>
   <body>
-    <h1 style="font-family: 'Courier New'">ICMS upcoming course detail</h1>
-    <table>
-      <tr>
-        <th>Course</th>
-        <th>Classroom address</th>
-        <th>Teacher's message</th>
-        <th>Link of Zoom</th>
-      </tr>
-      __COURSE_INFO__
-    </table>
-    <br />
-    <br />
-    <table>
-      <tr>
-        <th>Course materials</th>
-        <th>Link</th>
-      </tr>
-      __COURSE_MATERIALS__
-    </table>
+    <h2 style="font-family: 'Courier New'">
+      ICMS upcoming course detail for __COURSE_FULL_CODE__
+    </h1>
+    <div>
+      <b>Location: </b> __COURSE_LOCATION__
+    </div>
+    <div>
+      <b>Start Time: </b> __COURSE_START_TIME__
+    </div>
+    <div>
+      <b>End Time: </b> __COURSE_END_TIME__
+    </div>
+    <div>
+      <b>Zoom link: </b> <a href="__COURSE_ZOOM_LINK__">Lecture Zoom Link</a>
+    </div>
+    <div>
+      <p>You have __TIME_LEFT__ mins left until the start of the class! Get Hurry!</p>
+    </div>
+    <br>
+    <div>
+      <h3>[Teacher's Message]</h3>
+      __TEACHER_MESSAGE__
+    </div>
+    <br>
+     <div>
+      <h3>[Course Description]</h3>
+      __COURSE_DESCRIPTION__
+    </div>
+
+    <br>
+    __COURSE_EVENTS__
+    <br>
+
   </body>
 </html>

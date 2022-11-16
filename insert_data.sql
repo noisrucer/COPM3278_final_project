@@ -6,7 +6,6 @@ INSERT INTO Student VALUES
 ('3035729423', 'Jungan Choi','F',22, "junganchoi26@gmail.com"),
 ('3035786603', 'Lo Yu Sum', 'M', 20, "loyusum246807952@gmail.com");
 
-
 INSERT INTO Course VALUES
 ('COMP3278', 'Intro. to Database Management Systems', 'This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity, and concurrency control.'),
 ('COMP3230', 'Principles of Operating Systems', 'Operating system structures, process and thread, CPU scheduling, process synchronization, deadlocks, memory management, file systems, I/O systems and device driver, mass-storage structure and disk scheduling, case studies.'),
