@@ -1,0 +1,2 @@
+INSERT INTO RedirectionActivity VALUES
+(NULL, __STUDENT_ID__, __SUBCLASS_EVENT_ID__, __TYPE__, __ACTION_DATE__);

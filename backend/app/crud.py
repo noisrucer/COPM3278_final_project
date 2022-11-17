@@ -45,3 +45,26 @@ def create_email_activity(student_id, course_id, subclass_id, action_date):
                            )
                        )
                        
+
+def create_redirection_activity(student_id, subclass_event_id, type, action_date):
+    return db_exe_file('backend/sql/create_redirection_activity.sql',
+                       lambda s: s.replace(
+                           "__STUDENT_ID__", "'{}'".format(student_id)
+                           ).replace(
+                               "__SUBCLASS_EVENT_ID__", "{}".format(subclass_event_id if subclass_event_id else 'NULL')
+                           ).replace(
+                               "__TYPE__", "'{}'".format(type)
+                           ).replace(
+                               "__ACTION_DATE__", "'{}'".format(action_date)
+                           )
+                       )
+    
+
+def logout(login_token, logout_time):
+    return db_exe_file('backend/sql/logout.sql',
+                       lambda s: s.replace(
+                            "__LOGOUT_TIME__", "'{}'".format(logout_time)
+                           ).replace(
+                           "__LOGIN_TOKEN__", "'{}'".format(login_token)
+                           )
+                       )

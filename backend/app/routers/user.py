@@ -5,6 +5,8 @@ from .. import crud
 from collections import OrderedDict
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Union
+from ..db import db_cursor, db_connector
 
 from backend.email.email_api import email_sender
 
@@ -123,7 +125,6 @@ class EmailUserInput(BaseModel):
 
 @router.post('/email_course_info')
 async def send_course_info_by_email(email_user_input: EmailUserInput):
-    print("RECEIVED")
     student_id = email_user_input.student_id
     course_id = email_user_input.course_id
     subclass_id = email_user_input.subclass_id
@@ -147,13 +148,14 @@ async def send_course_info_by_email(email_user_input: EmailUserInput):
             }
     
     course_events = crud.get_course_event(course_id, subclass_id)[0]
+    print(course_events)
     course_events_html = ""
     for evt in course_events:
-        type = evt[2]
-        title = evt[3]
-        evt_link = evt[4]
-        upload_time = evt[5]
-        deadline = evt[6] if evt[6] else "TBC"
+        type = evt[4]
+        title = evt[5]
+        evt_link = evt[6]
+        upload_time = evt[7]
+        deadline = evt[8] if evt[8] else "TBC"
         
         evt_html = f"""
             <div class="course-event">
@@ -161,7 +163,7 @@ async def send_course_info_by_email(email_user_input: EmailUserInput):
                 <p><b>Type: </b>{type}</p>
                 <p><b>Uploaded Time: </b>{upload_time}</p>
                 <p><b>Deadline: </b>{deadline}</p>
-                <p><b>Link: </b> <a href="{detail['CourseZoomLink']}">{evt_link}</a></p>
+                <p><b>Link: </b> <a href="{detail['CourseZoomLink']}">link</a></p>
             </div>
         """
         
@@ -202,13 +204,41 @@ async def send_course_info_by_email(email_user_input: EmailUserInput):
         )
         
         # email_content += course_events_html
-    print(email_content)
+    # print(email_content)
     email_sender.send_email(
         student_email, email_content, course_full_code
     )
     
     action_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    crud.create_email_activity(student_id, course_id, subclass_id, action_date)
     
+    sql = f"INSERT INTO EmailActivity VALUES (NULL, '{student_id}', '{course_id}', '{subclass_id}', '{action_date}');"
+    db_cursor.execute(sql)
+    db_connector.commit()
+    # crud.create_email_activity(student_id, course_id, subclass_id, action_date)
     
-    return {"message": "Message sent to {student_email}"}
+    return {"message": "Message sent to {student_email}"} 
+    
+class RedirectionActivityInput(BaseModel):
+    student_id: str
+    subclass_event_id: Union[str, None] = None
+    type: str
+    
+@router.post("/redirection")
+async def redirection_activity(redirection_input: RedirectionActivityInput):
+    student_id = redirection_input.student_id
+    subclass_event_id = redirection_input.subclass_event_id
+    type = redirection_input.type
+    
+    action_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # crud.create_redirection_activity(student_id, subclass_event_id, type, action_date)
+    sql = ""
+    if not subclass_event_id:
+        print("safasdfasaf")
+        sql = f"INSERT into redirectionactivity values (NULL, '{student_id}', NULL, '{type}', '{action_date}');"
+    else:
+        sql = f"INSERT into redirectionactivity values (NULL, '{student_id}', {subclass_event_id}, '{type}', '{action_date}');"
+    db_cursor.execute(sql)
+    db_connector.commit()
+    
+    return {"message": "Successfully created RedirectionActivity"}

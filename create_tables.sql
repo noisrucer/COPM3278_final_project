@@ -38,7 +38,6 @@ CREATE TABLE SubclassInfo (
     FOREIGN KEY(course_id) REFERENCES Course(course_id)
 );
 
-
 CREATE TABLE SubclassEvent(
     subclass_event_id INT NOT NULL AUTO_INCREMENT,
     course_id VARCHAR(100) NOT NULL, 
@@ -53,7 +52,6 @@ CREATE TABLE SubclassEvent(
     FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id)
 );
 
-
 CREATE TABLE StudentEnrollsSubclass(
     course_id VARCHAR(100) NOT NULL,
     subclass_id VARCHAR(100) NOT NULL,
@@ -64,7 +62,6 @@ CREATE TABLE StudentEnrollsSubclass(
     FOREIGN KEY(student_id) REFERENCES Student(student_id),
     FOREIGN KEY(subclass_id) REFERENCES Subclass(subclass_id)
 );
-
 
 CREATE TABLE Logging(
     logging_id INT NOT NULL AUTO_INCREMENT,
@@ -91,6 +88,7 @@ CREATE TABLE EmailActivity(
 CREATE TABLE RedirectionActivity(
     redirection_activity_id INT NOT NULL AUTO_INCREMENT,
     student_id VARCHAR(100) NOT NULL,
+    subclass_event_id INT NULL,
     type ENUM('zoom_link', 'lecture_note', 'tutorial_note', 'assignment', 'quiz') NOT NULL,
     action_date DATETIME NOT NULL,
     PRIMARY KEY(redirection_activity_id),

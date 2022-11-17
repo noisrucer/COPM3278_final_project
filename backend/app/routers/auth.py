@@ -9,6 +9,7 @@ from fastapi import APIRouter, Depends
 
 from FaceRecognition.face_recognizer import FaceRecognizer
 from backend.app.db import db_connector, db_cursor
+from .. import crud
 
 router = APIRouter(
     prefix="/auth",
@@ -33,7 +34,7 @@ async def login(login_input: LoginIn):
         conf_thresh=60
     )
     
-    response_msg = recognizer.recognize_img(img_np)
+    img, response_msg = recognizer.recognize_img(img_np)
     json_response = {
         "login_status": False,
         "student_id": None,
@@ -44,6 +45,7 @@ async def login(login_input: LoginIn):
         return json_response
     
     json_response.update(**response_msg['data'])
+    # json_response.update({"img": img})
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     sql = f"INSERT INTO Logging (logging_id, student_id, login_time, logout_time, login_token) VALUES (NULL, '{json_response['student_id']}', '{current_time}', NULL, '{json_response['login_token']}');"
     db_cursor.execute(sql)
@@ -52,7 +54,21 @@ async def login(login_input: LoginIn):
     return json_response
     
     
+class LogOut(BaseModel):
+    login_token: str
     
+@router.post('/logout')
+async def logout(logout_input: LogOut):
+    login_token = logout_input.login_token
+    print("login_token: {}".format(login_token))
+    logout_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print("logout_time: {}".format(logout_time))
+    print(type(login_token))
+    print(type(logout_time))
+    sql = f"UPDATE Logging SET logout_time='{logout_time}' WHERE login_token = '{login_token}';";
+    print(sql)
+    db_cursor.execute(sql)
+    db_connector.commit()
+    # crud.logout(login_token, logout_time)
     
-    
-    
+   

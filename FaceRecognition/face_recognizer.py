@@ -149,7 +149,7 @@ class FaceRecognizer:
                 #  self.engine.say(hello)
                 # engine.runAndWait()
                 
-        return response_msg
+        return img, response_msg
 
 
 
