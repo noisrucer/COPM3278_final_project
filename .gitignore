@@ -3,4 +3,9 @@ backend/backend.ini
 **/haarcascade/
 **/haarcascade/**
 **/data/
-**/data/**oI
+**/data/**
+**/node_modules/
+**/node_modules/**
+**/.pnp
+**/.DS_Store
+**/.DS_Store/**
