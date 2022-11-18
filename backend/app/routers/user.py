@@ -87,7 +87,6 @@ async def get_coming_course_by_token(login_token: str):
             course_id, subclass_id = course_info[0], course_info[1]
             course_events = crud.get_course_event(course_id, subclass_id)[0]
             
-            
             return {
                 "CourseEvents": course_events,
                 "week_day": week_day,
@@ -144,7 +143,7 @@ async def send_course_info_by_email(email_user_input: EmailUserInput):
                 "CourseStartTime": course_info[5],
                 "CourseEndTime": course_info[6],
                 "CourseLocation": course_info[7],
-                "CourseZoomLink": course_info[8]
+                "CourseZoomLink": course_info[8],
             }
     
     course_events = crud.get_course_event(course_id, subclass_id)[0]

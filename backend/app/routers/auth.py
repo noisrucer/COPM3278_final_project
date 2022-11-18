@@ -45,11 +45,22 @@ async def login(login_input: LoginIn):
         return json_response
     
     json_response.update(**response_msg['data'])
-    # json_response.update({"img": img})
+    student_id = response_msg['data']['student_id']
+    student_name = crud.get_student_name_by_student_id(student_id)[0][0][0]
+    json_response.update({"student_name": student_name})
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     sql = f"INSERT INTO Logging (logging_id, student_id, login_time, logout_time, login_token) VALUES (NULL, '{json_response['student_id']}', '{current_time}', NULL, '{json_response['login_token']}');"
     db_cursor.execute(sql)
     db_connector.commit()
+    
+    # find_student_sql = f"SELECT name FROM Student WHERE student_id='{response_msg['data']['student_id']}';"
+    # print(find_student_sql)
+    # student_name = db_cursor.execute(find_student_sql)
+    # db_connector.commit()
+    # print("student_name: {}".format(student_name))
+    # json_response.update({"student_name": student_name})
+    current_time = datetime.now().strftime("%H:%M:%S")
+    json_response.update({"login_time": current_time})
     
     return json_response
     
