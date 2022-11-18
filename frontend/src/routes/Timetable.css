@@ -1,0 +1,89 @@
+table, th, td{
+  border: 1px solid;
+  border-color: #EEEDE7;
+  padding: 10px;
+}
+
+
+table {
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
+  table-layout: fixed ;
+  width: 85% ;
+}
+
+td{
+  width: 25% ;
+}
+
+.container{
+    color:white;
+    margin-left: auto;
+    margin-right: auto;
+}
+.COMP3278{
+  background-color: #02c2c7;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.COMP3230{
+  background-color: #ADDFDE;
+  border-color: #ADDFDE;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.COMP3322{
+  background-color: #09647a;
+  border-color: #09647a;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.CCCH9047{
+  background-color: #1F375D;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+  border-style: solid;
+  border-color:#1F375D;
+}
+
+.COMP3297{
+  background-color: #0C4C8A;
+  border-color: #0C4C8A;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.COMP3270{
+  background-color: #97D5E0;
+  border-color: #97D5E0;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.CCHU9060{
+  background-color: #d9e2e9;
+  border-color: #d9e2e9;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
+.STAT3600{
+  background-color: aquamarine;
+  border-color: aquamarine;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+}
+
