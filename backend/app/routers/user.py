@@ -1,3 +1,5 @@
+import base64
+import io
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import json
@@ -7,6 +9,8 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Union
 from ..db import db_cursor, db_connector
+import cv2
+from PIL import Image
 
 from backend.email.email_api import email_sender
 
@@ -68,11 +72,11 @@ def get_response_timetable_courses(student_id, student_name, timetable_courses):
     }
 }
     
-    
+
 @router.post("/coming_course/{login_token}")
 async def get_coming_course_by_token(login_token: str):
     courses = crud.get_course_within_hours(login_token, hours=1)[0]
-    
+
     # If there's a class within 1 hour
     if len(courses) > 0:
         courses = courses[0]
@@ -241,3 +245,39 @@ async def redirection_activity(redirection_input: RedirectionActivityInput):
     db_connector.commit()
     
     return {"message": "Successfully created RedirectionActivity"}
+
+class GetPathInput(BaseModel):
+    from_location: str
+    to_location: str
+    time_section: int
+
+@router.post("/get_path")
+async def get_path(request: GetPathInput):
+
+    print(request)
+    result = crud.get_shortest_path_and_times(request.from_location, request.to_location, request.time_section)[0]
+
+    response_json = {'time': None , 'path': [], 'map': None}
+
+    for path_variant in result[::-1]:
+        response_json['time'] = path_variant[1]
+        response_json['path'] = [crud.get_location_name_by_id(int_id)[0][0][0] for int_id in path_variant[2].split('/')[1:-1]]
+
+        print("time needed:", response_json['time'])
+        print("path:", response_json['path'])
+
+    if response_json['time'] is not None:
+        with open(R'backend\Campus\Map\LocationCoordinate.json', 'r') as f:
+            campus_image = cv2.imread(R'backend\Campus\Map\CampusMap.png')
+            location_conservation = json.loads(f.read())
+            for i in range(1, len(response_json['path'])):
+                cv2.arrowedLine(campus_image, location_conservation[response_json['path'][i - 1]], location_conservation[response_json['path'][i]], (255, 0, 0), 2)
+            cv2.imwrite('savedImage.jpg', campus_image)
+
+            buffered = io.BytesIO()
+            image = Image.fromarray(campus_image)
+            image.save(buffered, format="JPEG")
+            response_json["map"] = base64.b64encode(buffered.getvalue())
+
+
+    return response_json

@@ -68,3 +68,14 @@ def logout(login_token, logout_time):
                            "__LOGIN_TOKEN__", "'{}'".format(login_token)
                            )
                        )
+
+def get_shortest_path_and_times(from_location: str, to_location: str, time_section: int):
+    return db_exe_file('backend/sql/path_search.sql',
+                       lambda s: s.replace("__FROM_LOCATION__", "'{}'".format(from_location))
+                       .replace("__TO_LOCATION__", "'{}'".format(to_location))
+                       .replace("__TIME_SECTION__", "{}".format(time_section)))
+
+def get_location_name_by_id(id: int):
+    return db_exe_file('backend/sql/location_name_by_id.sql',
+                       lambda s: s.replace("__LOCATION_ID__", "'{}'".format(id)))
+

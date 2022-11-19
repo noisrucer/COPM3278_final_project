@@ -94,3 +94,23 @@ CREATE TABLE RedirectionActivity(
     PRIMARY KEY(redirection_activity_id),
     FOREIGN KEY(student_id) REFERENCES Student(student_id)
 );
+
+-- TODO: use FOREIGN KEY at class_loca of SubclassInfo
+create table LocationMeta(
+    location_id INT NOT NULL AUTO_INCREMENT,
+    loca VARCHAR(100) NOT NULL,
+    PRIMARY KEY(location_id),
+    UNIQUE(loca)
+);
+
+create table PathTime(
+    provided_by VARCHAR(100) NOT NULL,
+    start_loca_id INT NOT NULL,
+    end_loca_id INT NOT NULL,
+    time_section INT NOT NULL,
+    time_second INT NOT NULL,
+    PRIMARY KEY(provided_by, start_loca_id, end_loca_id, time_section),
+    FOREIGN KEY(provided_by) REFERENCES Student(student_id),
+    FOREIGN KEY(start_loca_id) REFERENCES LocationMeta(location_id),
+    FOREIGN KEY(end_loca_id) REFERENCES LocationMeta(location_id)
+);
