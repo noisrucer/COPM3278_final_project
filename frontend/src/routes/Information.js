@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./Information.module.css";
 import Nav from "../components/NavSuccess";
+var ReactDOM = require('react-dom');
 
 function Information({
   studentId,
@@ -21,8 +22,8 @@ function Information({
   studentName,
   loginTime,
 }) {
-  const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
-  //const link = "http://localhost:8000/";
+  // const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
+  const link = "http://localhost:8000/";
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(false);
   const [count, setCount] = useState(0);
@@ -150,7 +151,7 @@ function Information({
                   className={styles.button}
                   onClick={(e) => {
                     e.preventDefault();
-                    //capture();
+                    capture();
                   }}
                 >
                   Send Email
@@ -237,3 +238,26 @@ Information.propTypes = {
 };
 
 export default Information;
+
+/*
+
+                          const tmp_requestOptions = {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              from_location: "MWT2",
+                              to_location: "CPD-LG.1",
+                              time_section: 1,
+                            }),
+                          };
+                          fetch(`${link}user/get_path`, tmp_requestOptions)
+                            .then((response) => {
+                              return response.json();
+                            })
+                            .then((data) => {
+                              const SuccessImage = ({ data }) => <img src={`data:image/jpeg;base64,${data}`} />
+                              ReactDOM.render(<SuccessImage data={data["map"]} />, document.getElementById('UserCameraDiv'))
+                            });
+                          return;
+
+*/
