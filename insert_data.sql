@@ -3,7 +3,8 @@
 -- Active: 1667214464632@@127.0.0.1@3306@comp3278_fp
 INSERT INTO Student VALUES
 ('3035555626', 'Yonghyun Kwon', 'M', 24, "u3555562@connect.hku.hk"),
-('3035604075', 'Yeon Park', 'M',23, "pyeon99@gmail.com");
+('3035604075', 'Yeon Park', 'M',23, "pyeon99@gmail.com"),
+('3035786603', 'Lo Yu Sum', 'M',20, "emcjava@connect.hku.hk");
 
 INSERT INTO Course VALUES
 ('COMP3278', 'Intro. to Database Management Systems', 'This course studies the principles, design, administration, and implementation of database management systems. Topics include: entity-relationship model, relational model, relational algebra, database design and normalization, database query languages, indexing schemes, integrity, and concurrency control.'),
@@ -60,7 +61,7 @@ INSERT INTO SubclassEvent VALUES
 
 --if a student is already enrolled in course, can't enrolled in another subclass --
 INSERT INTO StudentEnrollsSubclass VALUES
-('CCCH9047', 'A', '3035555626', '2022-09-01')
+('CCCH9047', 'A', '3035555626', '2022-09-01'),
 ('COMP3297', 'A', '3035604075', '2022-09-01'),
 ('COMP3297', 'A', '3035555626', '2022-09-01'),
 ('COMP3270', 'A', '3035604075', '2022-09-01'),
