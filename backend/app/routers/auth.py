@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
+from PIL import Image
 
 from FaceRecognition.face_recognizer import FaceRecognizer
 from backend.app.db import db_connector, db_cursor
@@ -16,9 +17,11 @@ router = APIRouter(
     tags=["auth"]
 )
 
+
 class LoginIn(BaseModel):
     base64_encoded_img: str
-    
+
+
 @router.post('/login')
 async def login(login_input: LoginIn):
     # print(login_input)
@@ -27,13 +30,13 @@ async def login(login_input: LoginIn):
     base64_decoded = base64.b64decode(encoded_img_str)
     img = Image.open(io.BytesIO(base64_decoded))
     img_np = np.array(img)
-    
+
     recognizer = FaceRecognizer(
         db_conn=db_connector,
         db_cursor=db_cursor,
         conf_thresh=60
     )
-    
+
     img, response_msg = recognizer.recognize_img(img_np)
     json_response = {
         "login_status": False,
@@ -43,7 +46,12 @@ async def login(login_input: LoginIn):
     
     if response_msg['status'] == "fail":
         return json_response
-    
+
+    buffered = io.BytesIO()
+    image = Image.fromarray(img)
+    image.save(buffered, format="JPEG")
+    json_response["img"] = base64.b64encode(buffered.getvalue())
+
     json_response.update(**response_msg['data'])
     student_id = response_msg['data']['student_id']
     student_name = crud.get_student_name_by_student_id(student_id)[0][0][0]
@@ -52,7 +60,7 @@ async def login(login_input: LoginIn):
     sql = f"INSERT INTO Logging (logging_id, student_id, login_time, logout_time, login_token) VALUES (NULL, '{json_response['student_id']}', '{current_time}', NULL, '{json_response['login_token']}');"
     db_cursor.execute(sql)
     db_connector.commit()
-    
+
     # find_student_sql = f"SELECT name FROM Student WHERE student_id='{response_msg['data']['student_id']}';"
     # print(find_student_sql)
     # student_name = db_cursor.execute(find_student_sql)
@@ -61,13 +69,14 @@ async def login(login_input: LoginIn):
     # json_response.update({"student_name": student_name})
     current_time = datetime.now().strftime("%H:%M:%S")
     json_response.update({"login_time": current_time})
-    
+
     return json_response
-    
-    
+
+
 class LogOut(BaseModel):
     login_token: str
-    
+
+
 @router.post('/logout')
 async def logout(logout_input: LogOut):
     login_token = logout_input.login_token
@@ -76,10 +85,8 @@ async def logout(logout_input: LogOut):
     print("logout_time: {}".format(logout_time))
     print(type(login_token))
     print(type(logout_time))
-    sql = f"UPDATE Logging SET logout_time='{logout_time}' WHERE login_token = '{login_token}';";
+    sql = f"UPDATE Logging SET logout_time='{logout_time}' WHERE login_token = '{login_token}';"
     print(sql)
     db_cursor.execute(sql)
     db_connector.commit()
     # crud.logout(login_token, logout_time)
-    
-   
