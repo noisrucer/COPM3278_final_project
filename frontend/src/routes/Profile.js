@@ -6,6 +6,7 @@ import { json } from "react-router-dom";
 import Timetable from "./Timetable";
 import Information from "./Information";
 import Nav from "../components/NavUnsuccess";
+var ReactDOM = require('react-dom');
 
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
@@ -90,11 +91,16 @@ const Profile = () => {
         const student_Name = data["student_name"];
 
         if (login_status == "success") {
-          setLoginStatus(true);
-          setLoginToken(login_token);
-          setStudentId(student_id);
-          setStudentName(student_Name);
-          setLoginTime(login_Time);
+          const SuccessImage = ({ data }) => <img src={`data:image/jpeg;base64,${data}`} />
+          ReactDOM.render(<SuccessImage data={data["img"]} />, document.getElementById('UserCameraDiv'))
+
+          setTimeout(() => {
+            setLoginStatus(true);
+            setLoginToken(login_token);
+            setStudentId(student_id);
+            setStudentName(student_Name);
+            setLoginTime(login_Time);
+          }, 3000);
 
           // fetch(`https://075b-175-159-176-107.ap.ngrok.io/user/comming_course/${login_token}`)
           //   .then((response) => {
@@ -200,7 +206,7 @@ const Profile = () => {
                 <i class="fa-regular fa-circle-user"></i>
                 <h2 className={styles.user_login}>User Login</h2>
 
-                <div>
+                <div id="UserCameraDiv">
                   <Webcam
                     audio={false}
                     height={300}
