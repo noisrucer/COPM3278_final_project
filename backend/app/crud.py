@@ -79,6 +79,14 @@ def get_location_name_by_id(id: int):
     return db_exe_file('backend/sql/location_name_by_id.sql',
                        lambda s: s.replace("__LOCATION_ID__", "'{}'".format(id)))
 
+def get_previous_course(login_token: str, current_course_id: str, current_subclass_id: str, week_day: str):
+    return db_exe_file('backend/sql/get_course_before_in_day.sql',
+                       lambda s: s.replace("__COURSE_ID__", "'{}'".format(current_course_id))
+                       .replace("__SUBCLASS_ID__", "'{}'".format(current_subclass_id))
+                       .replace("__WEEK_DAY__", "'{}'".format(week_day))
+                       .replace("__TOKEN__", "'{}'".format(login_token)))
+
+
 def get_next_course(login_token: str, current_course_id: str, current_subclass_id: str, week_day: str):
     return db_exe_file('backend/sql/get_course_after_in_day.sql',
                        lambda s: s.replace("__COURSE_ID__", "'{}'".format(current_course_id))
@@ -93,3 +101,11 @@ def update_path_time(student_id: str, from_location: str, to_location: str, time
                        .replace("__TO_LOCATION__", "'{}'".format(to_location))
                        .replace("__TIME_SECTION__", "{}".format(time_section))
                        .replace("__TIME__", "{}".format(second)))
+    
+    
+def get_course_location(current_course_id: str, current_subclass_id: str, week_day: str):
+    return db_exe_file('backend/sql/get_course_location.sql',
+                       lambda s: s.replace("__COURSE_ID__", "'{}'".format(current_course_id))
+                       .replace("__SUBCLASS_ID__", "'{}'".format(current_subclass_id))
+                       .replace("__WEEK_DAY__", "'{}'".format(week_day)))
+
