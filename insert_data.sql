@@ -28,15 +28,15 @@ INSERT INTO SubclassInfo VALUES
 ('A', 'COMP3278', 'Thursday', '13:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
 ('A', 'COMP3230', 'Tuesday', '10:30', '12:20', 'CPD-LG.01', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
 ('A', 'COMP3230', 'Thursday', '10:30', '12:20', 'CYPP2', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
-('A', 'COMP3322', 'Monday', '15:30', '17:20', 'CPD-LG.1', 'TBC'),
-('A', 'COMP3322', 'Friday', '15:30', '17:20', 'CPD-LG.1', 'TBC'),
-('A', 'CCCH9047', 'Wednesday', '16:30', '18:20', 'TBC', 'TBC'),
-('A', 'COMP3297', 'Tuesday', '09:30', '10:20', 'CYPP2', 'None'),
-('A', 'COMP3297', 'Friday', '09:30', '11:20', 'CYPP2', 'None'),
+('A', 'COMP3322', 'Monday', '15:30', '17:20', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
+('A', 'COMP3322', 'Friday', '15:30', '17:20', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
+('A', 'CCCH9047', 'Wednesday', '16:30', '18:20', 'TBC', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
+('A', 'COMP3297', 'Tuesday', '09:30', '10:20', 'CYPP2', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
+('A', 'COMP3297', 'Friday', '09:30', '11:20', 'CYPP2', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
 ('A', 'COMP3270', 'Tuesday', '12:30', '13:20', 'CYCP1', 'https://hku.zoom.us/j/97433800177?pwd=T2hSWEdqWitDQ1dUUXJ4MGQ4OENJZz09'),
 ('A', 'COMP3270', 'Friday', '12:30', '14:20', 'CYCP1', 'https://hku.zoom.us/j/97433800177?pwd=T2hSWEdqWitDQ1dUUXJ4MGQ4OENJZz09'),
 ('A', 'CCHU9060', 'Wednesday', '12:30', '14:20', 'MWT1', 'https://hku.zoom.us/j/94195395496?pwd=alRoeHcxL1hkSk5Pc1FkWUdaajQyZz09'),
-('A', 'STAT3600', 'Tuesday', '13:30', '14:20', 'LE2', 'https://hku.zoom.us/rec/play/F7st-acHi63Jtw2moBHNyRKMlmGqgxqoyAedH1wvH2WO6znSeiWE2AoofzCfHE23UEEYLYsJoM1SJYhV.E3dZQRrPAVhgRv58?continueMode=true');
+('A', 'STAT3600', 'Tuesday', '13:30', '16:20', 'LE2', 'https://hku.zoom.us/rec/play/F7st-acHi63Jtw2moBHNyRKMlmGqgxqoyAedH1wvH2WO6znSeiWE2AoofzCfHE23UEEYLYsJoM1SJYhV.E3dZQRrPAVhgRv58?continueMode=true');
 
 INSERT INTO SubclassEvent VALUES
 (NULL, 'COMP3230', 'A', 'assignment', 'Assignment 1', 'https://drive.google.com/file/d/1OVXQOi7xnrFEQh3DBwINmMvjfkc4lB3X/view?usp=share_link', '2022-09-28 13:00', NULL),
@@ -61,7 +61,7 @@ INSERT INTO StudentEnrollsSubclass VALUES
 ('CCCH9047', 'A', '3035555626', '2022-09-01'),
 ('COMP3230', 'A', '3035555626', '2022-09-01'),
 ('STAT3600', 'A', '3035555626', '2022-09-01'),
-('STAT3278', 'A', '3035555626', '2022-09-01'),
+('COMP3278', 'A', '3035555626', '2022-09-01'),
 ('COMP3297', 'A', '3035604075', '2022-09-01'),
 ('COMP3297', 'A', '3035555626', '2022-09-01'),
 ('COMP3270', 'A', '3035604075', '2022-09-01'),
