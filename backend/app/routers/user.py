@@ -270,7 +270,7 @@ async def get_path(request: GetPathInput):
             location_conservation = json.loads(f.read())
             for i in range(1, len(response_json['path'])):
                 cv2.arrowedLine(campus_image, location_conservation[response_json['path'][i - 1]], location_conservation[response_json['path'][i]], (255, 0, 0), 2)
-            cv2.imwrite('savedImage.jpg', campus_image)
+            # cv2.imwrite('savedImage.jpg', campus_image)
 
             buffered = io.BytesIO()
             image = Image.fromarray(campus_image)
@@ -285,6 +285,19 @@ class GetNextCourseInput(BaseModel):
     current_course_id: str
     current_subclass_id: str
     week_day: str
+
+@router.post("/get_previous_course")
+async def get_previous_course(request: GetNextCourseInput):
+    result = crud.get_previous_course(request.login_token, request.current_course_id, request.current_subclass_id, request.week_day)[0]
+
+    if len(result) != 0:
+        return {
+            "week_day": result[0][2],
+            "CourseID": result[0][1],
+            "SubclassID": result[0][0],
+        }
+
+    return {}
 
 @router.post("/get_next_course")
 async def get_next_course(request: GetNextCourseInput):
@@ -313,3 +326,30 @@ async def update_path_time(request: PathTimeUpdateInput):
     db_connector.commit()
 
     return {'message': "Successfully updated"}
+
+@router.post("/coming_course/path_to/{login_token}")
+async def path_to_coming_course(login_token: str):
+    courses = crud.get_course_within_hours(login_token, hours=10)[0]
+    
+    # course is within hours
+    if len(courses) != 0:
+        
+        req_res = GetNextCourseInput(login_token = login_token, current_course_id = courses[0][1],current_subclass_id = courses[0][0], week_day = courses[0][2])
+        previoud_course = await get_previous_course(req_res)
+        
+        print(previoud_course)
+        
+        # previoud courses exist
+        if len(previoud_course) != 0:
+            from_loca = crud.get_course_location(previoud_course['CourseID'], previoud_course['SubclassID'], previoud_course['week_day'])[0][0][0]
+            to_loca = crud.get_course_location(courses[0][1], courses[0][0], courses[0][2])[0][0][0]
+            
+            to_loca, from_loca = from_loca, to_loca
+            
+            print("to_loca", to_loca, "from_loca", from_loca)
+        
+            req_res = GetPathInput(from_location=from_loca, to_location=to_loca, time_section = 1)
+            print("lololololololololo")
+            return await get_path(req_res)
+
+    return {'message': "Successfully updated", "courses": courses}
