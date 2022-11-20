@@ -23,7 +23,6 @@ function NavSuccess({ loginToken, studentName, loginTime }) {
             <button
               className={nav.button}
               onClick={(e) => {
-                e.preventDefault();
                 console.log(loginToken);
                 const requestOptions = {
                   method: "POST",
