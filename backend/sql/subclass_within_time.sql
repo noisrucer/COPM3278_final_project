@@ -15,4 +15,6 @@ where
     and L.logout_time is null
     and L.student_id = SEC.student_id
     and SEC.course_id = SI.course_id
-    and SEC.subclass_id = SI.subclass_id;
+    and SEC.subclass_id = SI.subclass_id
+order by TIME(stime) DESC
+limit 1;
