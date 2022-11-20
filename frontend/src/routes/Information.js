@@ -198,7 +198,6 @@ function Information({
                 <button
                   className={styles.button}
                   onClick={(e) => {
-                    e.preventDefault();
                     capture();
                   }}
                 >

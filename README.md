@@ -11,17 +11,19 @@
 
 ### Environment
 
-1. Install all the packages listed out in the tutorial (face recognition tutorial)
-2. Install fastapi by
+0. Go to COMP3278_final_project directory
+
+1. Install backend requirements by
 
 ```shell
-pip install fastapi "uvicorn[standard]" mysql-connector-python
+pip install fastapi "uvicorn[standard]"
+python -m pip install -r requirements.txt
 ```
 
-3. Install other requirements by
+2. Install frontend requiremnts by first going to the `COMP3278_final_project/frontend/` then run
 
 ```shell
-pip install -r requirements.txt
+npm install
 ```
 
 4. Make sure to put the appropriate DB information in `/backend.ini` and **COPY** it to `/backend/` directory
@@ -32,25 +34,34 @@ cp backend.ini backend/backend.ini
 
 ### Start backend by
 
+- Go to the root directory (`COMP3278_final_project/`) of the project and run
+
 ```shell
-python -m backend.main
+uvicorn backend.app.api:app --reload
 ```
+
+### Start frotnend by
+
+- Go to `COMP3278_final_project/frontend` and run `npm start`
 
 ### To train face recognition model
 
-1. Go to the root directory of the project
-2. Change `user_name = "[YOUR NAME]"` in `FaceRecognition/face_capture.py`
-3. Start capturing your faces by
+1. Make sure you put the `haarcascade_frontalface_default.xml` file in `COMP3278_final_project/FaceRecognition/haarcascade` directory.
+
+2. Make sure you change the path to `haarcascade_frontalface_default.xml` to **ABSOLUTE PATH** in `FaceRecognition/face_capture.py` and `FaceRecognition/face_recognizer.py`
+
+3. Go to the root directory of the project
+4. Change `user_name = "[YOUR NAME]"` in `FaceRecognition/face_capture.py`
+5. Start capturing your faces by
 
 ```shell
 python FaceRecognition/face_capture.py
 ```
 
-4. Train the model by
+6. Train the model by
 
 ```shell
 python FaceRecognition/train.py
 ```
 
-5. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
-6. Complete!
+7. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
