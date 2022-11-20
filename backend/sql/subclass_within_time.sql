@@ -16,5 +16,5 @@ where
     and L.student_id = SEC.student_id
     and SEC.course_id = SI.course_id
     and SEC.subclass_id = SI.subclass_id
-order by TIME(stime) DESC
+order by TIME(stime)
 limit 1;

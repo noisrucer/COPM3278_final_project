@@ -349,7 +349,6 @@ async def path_to_coming_course(login_token: str):
             print("to_loca", to_loca, "from_loca", from_loca)
         
             req_res = GetPathInput(from_location=from_loca, to_location=to_loca, time_section = 1)
-            print("lololololololololo")
             return await get_path(req_res)
 
     return {'message': "Successfully updated", "courses": courses}
