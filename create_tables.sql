@@ -24,7 +24,7 @@ CREATE TABLE Subclass (
 );
 
 
---Assume no class at 00:00--
+--Assume no class at 00:00
 CREATE TABLE SubclassInfo (
     subclass_id VARCHAR(100) NOT NULL,
     course_id VARCHAR(100) NOT NULL,

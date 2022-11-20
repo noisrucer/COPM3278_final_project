@@ -310,4 +310,6 @@ class PathTimeUpdateInput(BaseModel):
 async def update_path_time(request: PathTimeUpdateInput):
     print(crud.update_path_time(request.student_id, request.from_location, request.to_location, request.time_section, request.time_in_second))
 
+    db_connector.commit()
+
     return {'message': "Successfully updated"}
