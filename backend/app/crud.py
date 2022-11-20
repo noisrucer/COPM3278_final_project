@@ -85,3 +85,11 @@ def get_next_course(login_token: str, current_course_id: str, current_subclass_i
                        .replace("__SUBCLASS_ID__", "'{}'".format(current_subclass_id))
                        .replace("__WEEK_DAY__", "'{}'".format(week_day))
                        .replace("__TOKEN__", "'{}'".format(login_token)))
+
+def update_path_time(student_id: str, from_location: str, to_location: str, time_section: int, second: int):
+    return db_exe_file('backend/sql/update_path_time.sql',
+                       lambda s: s.replace("__STUDENT_ID__", "'{}'".format(student_id))
+                       .replace("__FROM_LOCATION__", "'{}'".format(from_location))
+                       .replace("__TO_LOCATION__", "'{}'".format(to_location))
+                       .replace("__TIME_SECTION__", "{}".format(time_section))
+                       .replace("__TIME__", "{}".format(second)))

@@ -253,8 +253,6 @@ class GetPathInput(BaseModel):
 
 @router.post("/get_path")
 async def get_path(request: GetPathInput):
-
-    print(request)
     result = crud.get_shortest_path_and_times(request.from_location, request.to_location, request.time_section)[0]
 
     response_json = {'time': None , 'path': [], 'map': None}
@@ -300,3 +298,16 @@ async def get_next_course(request: GetNextCourseInput):
         }
 
     return {}
+
+class PathTimeUpdateInput(BaseModel):
+    student_id: str
+    from_location: str
+    to_location: str
+    time_section: int
+    time_in_second: int
+
+@router.put("/update_path_time")
+async def update_path_time(request: PathTimeUpdateInput):
+    print(crud.update_path_time(request.student_id, request.from_location, request.to_location, request.time_section, request.time_in_second))
+
+    return {'message': "Successfully updated"}
