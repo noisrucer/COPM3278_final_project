@@ -29,7 +29,9 @@ INSERT INTO Subclass VALUES
 INSERT INTO SubclassInfo VALUES
 ('A', 'COMP3278', 'Monday', '14:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
 ('A', 'COMP3278', 'Thursday', '13:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+('A', 'COMP3278', 'Sunday', '23:10', '23:40', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
 ('A', 'COMP3230', 'Tuesday', '10:30', '12:20', 'CPD-LG.01', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
+('A', 'COMP3230', 'Sunday', '22:30', '23:00', 'CPD-LG.01', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
 ('A', 'COMP3230', 'Thursday', '10:30', '12:20', 'CYPP2', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
 ('A', 'COMP3322', 'Monday', '15:30', '17:20', 'CPD-LG.1', 'TBC'),
 ('A', 'COMP3322', 'Friday', '15:30', '17:20', 'CPD-LG.1', 'TBC'),
@@ -183,7 +185,7 @@ values
     (NULL, 'CYPP2'),
     (NULL, 'CYCP1'),
     (NULL, 'LE2'),
-    (NULL, 'CPD-LG.1');
+    (NULL, 'CPD-LG.01');
 
 insert into
     PathTime
