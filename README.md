@@ -46,20 +46,22 @@ uvicorn backend.app.api:app --reload
 
 ### To train face recognition model
 
-1. Go to the root directory of the project
-2. Change `user_name = "[YOUR NAME]"` in `FaceRecognition/face_capture.py`
-3. Start capturing your faces by
+1. Make sure you put the `haarcascade_frontalface_default.xml` file in `COMP3278_final_project/FaceRecognition/haarcascade` directory.
+
+2. Make sure you change the path to `haarcascade_frontalface_default.xml` to **ABSOLUTE PATH** in `FaceRecognition/face_capture.py` and `FaceRecognition/face_recognizer.py`
+
+3. Go to the root directory of the project
+4. Change `user_name = "[YOUR NAME]"` in `FaceRecognition/face_capture.py`
+5. Start capturing your faces by
 
 ```shell
 python FaceRecognition/face_capture.py
 ```
 
-4. Train the model by
+6. Train the model by
 
 ```shell
 python FaceRecognition/train.py
 ```
 
-5. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
-
-6. Make sure you put the `haarcascade_frontalface_default.xml` file in `COMP3278_final_project/FaceRecognition/haarcascade` directory.
+7. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
