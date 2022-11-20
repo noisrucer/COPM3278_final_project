@@ -48,6 +48,8 @@ INSERT INTO SubclassEvent VALUES
 (NULL, 'COMP3270', 'A', 'tutorial_note', 'Tutorial 1', 'https://drive.google.com/file/d/1JMw_a31umY0OjrFmbYjKuJkgenL3wqhj/view?usp=share_link', '2022-10-15 12:30', NULL),
 (NULL, 'COMP3278', 'A', 'assignment', 'Assignment 1', 'https://drive.google.com/file/d/1UcHXeAM1zlMlAcTvKYn4L-q6RElGAapk/view?usp=share_link', '2022-11-02 10:20', NULL),
 (NULL, 'COMP3278', 'A', 'lecture_note', 'Lecture 1', 'https://drive.google.com/file/d/1WpTf6581Rv6_wkSWcBzzjNGEGbU_ILOW/view?usp=share_link', '2022-09-05 9:30', NULL),
+(NULL, 'COMP3278', 'A', 'lecture_note', 'Lecture 2', 'https://drive.google.com/file/d/1WpTf6581Rv6_wkSWcBzzjNGEGbU_ILOW/view?usp=share_link', '2022-09-10 10:30', NULL),
+(NULL, 'COMP3278', 'A', 'lecture_note', 'Lecture 3', 'https://drive.google.com/file/d/1WpTf6581Rv6_wkSWcBzzjNGEGbU_ILOW/view?usp=share_link', '2022-09-13 11:30', NULL),
 (NULL, 'COMP3278', 'A', 'tutorial_note', 'Tutorial 1', 'https://drive.google.com/file/d/1Vf1f9yHnrzCGj5bzLj_omXVuNAIAlOto/view?usp=share_link', '2022-09-10 15:30', NULL),
 (NULL, 'COMP3297', 'A', 'lecture_note', 'Lecture 0', 'https://drive.google.com/file/d/13FGvKz7vQcreu5OYWxDcwK9DN9A3R7cd/view?usp=share_link', '2022-09-04 11:00', NULL),
 (NULL, 'COMP3297', 'A', 'quiz', 'Quiz 1', 'https://drive.google.com/file/d/1MA1Ix2DhCEkINHlCD667urvTvu-d89j-/view?usp=share_link', '2022-10-25 19:50', NULL),
