@@ -281,3 +281,22 @@ async def get_path(request: GetPathInput):
 
 
     return response_json
+
+class GetNextCourseInput(BaseModel):
+    login_token: str
+    current_course_id: str
+    current_subclass_id: str
+    week_day: str
+
+@router.post("/get_next_course")
+async def get_next_course(request: GetNextCourseInput):
+    result = crud.get_next_course(request.login_token, request.current_course_id, request.current_subclass_id, request.week_day)[0]
+
+    if len(result) != 0:
+        return {
+            "week_day": result[0][2],
+            "CourseID": result[0][1],
+            "SubclassID": result[0][0],
+        }
+
+    return {}
