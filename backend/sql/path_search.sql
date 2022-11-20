@@ -1,7 +1,21 @@
 with RECURSIVE StartingLoca (start_loca_id, end_loca_id, time_section) as (
     select
-        (select location_id from LocationMeta where loca = __FROM_LOCATION__),
-        (select location_id from LocationMeta where loca = __TO_LOCATION__),
+        (
+            select
+                location_id
+            from
+                LocationMeta
+            where
+                loca = __FROM_LOCATION__
+        ),
+        (
+            select
+                location_id
+            from
+                LocationMeta
+            where
+                loca = __TO_LOCATION__
+        ),
         __TIME_SECTION__
 ),
 IQRPathTime (start_loca_id, end_loca_id, time_section, time) as (
@@ -80,7 +94,12 @@ PathSearch (current_loca_id, time, path, depth) AS (
         and ps.depth < 20
         and IQRpt.start_loca_id = ps.current_loca_id
         and not ps.path like CONCAT('%/', CAST(IQRpt.end_loca_id AS CHAR), '/%')
-        and sl.time_section = (select time_section from StartingLoca)
+        and sl.time_section = (
+            select
+                time_section
+            from
+                StartingLoca
+        )
 )
 SELECT
     ps.*
