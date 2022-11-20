@@ -11,17 +11,19 @@
 
 ### Environment
 
-1. Install all the packages listed out in the tutorial (face recognition tutorial)
-2. Install fastapi by
+0. Go to COMP3278_final_project directory
+
+1. Install backend requirements by
 
 ```shell
-pip install fastapi "uvicorn[standard]" mysql-connector-python
+pip install fastapi "uvicorn[standard]"
+python -m pip install -r requirements.txt
 ```
 
-3. Install other requirements by
+2. Install frontend requiremnts by first going to the `COMP3278_final_project/frontend/` then run
 
 ```shell
-pip install -r requirements.txt
+npm install
 ```
 
 4. Make sure to put the appropriate DB information in `/backend.ini` and **COPY** it to `/backend/` directory
@@ -32,9 +34,15 @@ cp backend.ini backend/backend.ini
 
 ### Start backend by
 
+- Go to the root directory (`COMP3278_final_project/`) of the project and run
+
 ```shell
-python -m backend.main
+uvicorn backend.app.api:app --reload
 ```
+
+### Start frotnend by
+
+- Go to `COMP3278_final_project/frontend` and run `npm start`
 
 ### To train face recognition model
 
@@ -53,4 +61,5 @@ python FaceRecognition/train.py
 ```
 
 5. Then, `train.yml` and `labels.pickle` will be created in `FaceRecognition/` directory
-6. Complete!
+
+6. Make sure you put the `haarcascade_frontalface_default.xml` file in `COMP3278_final_project/FaceRecognition/haarcascade` directory.
