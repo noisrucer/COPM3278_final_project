@@ -6,6 +6,7 @@ import { json } from "react-router-dom";
 import Timetable from "./Timetable";
 import Information from "./Information";
 import Nav from "../components/NavUnsuccess";
+
 var ReactDOM = require("react-dom");
 
 const WebcamComponent = () => <Webcam />;
@@ -154,10 +155,28 @@ const Profile = () => {
           });
         } else {
           setType(true);
-          setClassData((prevClassData) => {
-            console.log(data);
-            return data;
-          });
+
+          ////////////////////////////////////////////////
+
+          const GetPathRequestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          };
+          fetch(`${link}user/coming_course/path_to/${loginToken}`, GetPathRequestOptions)
+            .then((response) => {
+              return response.json();
+            })
+            .then((imageData) => {
+
+              console.log(imageData);
+              data['pathImage'] = imageData['map']
+              data['pathTime'] = imageData['time']
+              data['pathDes'] = imageData['path']
+              setClassData((prevClassData) => {
+                console.log(data);
+                return data;
+              });
+            });
           //}
           // setTimeTableData(data);
         }
@@ -186,6 +205,9 @@ const Profile = () => {
               loginToken={loginToken}
               studentName={studentName}
               loginTime={loginTime}
+              path_image={classData.pathImage}
+              path_time={classData.pathTime}
+              path_des={classData.pathDes}
             />
           ) : (
             <Timetable

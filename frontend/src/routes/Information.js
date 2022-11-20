@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./Information.module.css";
 import Nav from "../components/NavSuccess";
+import ReactImageMagnify from "react-image-magnify";
+import { Stepper, Step, StepLabel } from "@material-ui/core";
+
 var ReactDOM = require("react-dom");
 
 function Information({
@@ -21,6 +24,9 @@ function Information({
   loginToken,
   studentName,
   loginTime,
+  path_image,
+  path_time,
+  path_des,
 }) {
   // const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
   const link = "http://localhost:8000/";
@@ -76,6 +82,26 @@ function Information({
   }, [loading]);
 
   useEffect(() => {}, [count]);
+
+  const MapImage = ({ data }) => (
+    <ReactImageMagnify
+      {...{
+        smallImage: {
+          alt: "map",
+          isFluidWidth: true,
+          src: `data:image/jpeg;base64,${data}`,
+        },
+        largeImage: {
+          src: `data:image/jpeg;base64,${data}`,
+          width: 1200,
+          height: 1800,
+        },
+        enlargedImageStyle: {
+          objectFit: "contain",
+        },
+      }}
+    />
+  );
 
   return (
     <div>
@@ -146,6 +172,29 @@ function Information({
                   <div className={styles.course_title}>Teacher's Message</div>
                   <div className={styles.course_message}>{message}</div>
                 </div>
+                {path_time ? (
+                  <div className={styles.course_container_announcement}>
+                    <div className={styles.course_title}>
+                      How to get here from previous courses
+                    </div>
+                    <Stepper>
+                      {path_des.map((val, key) => {
+                        return (
+                          <Step>
+                            <StepLabel>{val}</StepLabel>
+                          </Step>
+                        );
+                      })}
+                      <Step>
+                        <StepLabel>
+                          Arrive after {Number(path_time / 60).toFixed(3)}{" "}
+                          minutes
+                        </StepLabel>
+                      </Step>
+                    </Stepper>
+                    <MapImage data={path_image} />
+                  </div>
+                ) : null}
                 <button
                   className={styles.button}
                   onClick={(e) => {
