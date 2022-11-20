@@ -215,7 +215,7 @@ async def send_course_info_by_email(email_user_input: EmailUserInput):
     db_connector.commit()
     # crud.create_email_activity(student_id, course_id, subclass_id, action_date)
     
-    return {"message": "Message sent to {student_email}"} 
+    return {"message": f"Message sent to {student_email}"} 
     
 class RedirectionActivityInput(BaseModel):
     student_id: str
