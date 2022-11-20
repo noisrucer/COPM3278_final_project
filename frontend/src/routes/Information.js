@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./Information.module.css";
 import Nav from "../components/NavSuccess";
-var ReactDOM = require('react-dom');
+var ReactDOM = require("react-dom");
 
 function Information({
   studentId,
@@ -113,10 +113,9 @@ function Information({
                       <b>Zoom Link: </b>
                       <a
                         className={styles.link}
-                        href={zoomLink}
                         target="_blank"
+                        href={zoomLink}
                         onClick={(e) => {
-                          e.preventDefault();
                           const requestOptions = {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },

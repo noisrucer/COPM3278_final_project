@@ -6,7 +6,7 @@ import { json } from "react-router-dom";
 import Timetable from "./Timetable";
 import Information from "./Information";
 import Nav from "../components/NavUnsuccess";
-var ReactDOM = require('react-dom');
+var ReactDOM = require("react-dom");
 
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
@@ -25,8 +25,8 @@ const Profile = () => {
   const [timeTableData, setTimeTableData] = useState([]);
   const [classData, setClassData] = useState([]);
   const [type, setType] = useState(false);
-  const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
-  //const link = "http://localhost:8000/";
+  // const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
+  const link = "http://localhost:8000/";
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -91,8 +91,13 @@ const Profile = () => {
         const student_Name = data["student_name"];
 
         if (login_status == "success") {
-          const SuccessImage = ({ data }) => <img src={`data:image/jpeg;base64,${data}`} />
-          ReactDOM.render(<SuccessImage data={data["img"]} />, document.getElementById('UserCameraDiv'))
+          const SuccessImage = ({ data }) => (
+            <img src={`data:image/jpeg;base64,${data}`} />
+          );
+          ReactDOM.render(
+            <SuccessImage data={data["img"]} />,
+            document.getElementById("UserCameraDiv")
+          );
 
           setTimeout(() => {
             setLoginStatus(true);

@@ -1,7 +1,7 @@
 import nav from "./Nav.module.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-const link = "https://cf91-118-140-125-70.ap.ngrok.io/";
+const link = "http://localhost:8000/";
 
 function NavSuccess({ loginToken, studentName, loginTime }) {
   return (
