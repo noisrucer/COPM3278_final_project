@@ -58,7 +58,10 @@ INSERT INTO SubclassEvent VALUES
 
 --if a student is already enrolled in course, can't enrolled in another subclass --
 INSERT INTO StudentEnrollsSubclass VALUES
-('CCCH9047', 'A', '3035555626', '2022-09-01')
+('CCCH9047', 'A', '3035555626', '2022-09-01'),
+('COMP3230', 'A', '3035555626', '2022-09-01'),
+('STAT3600', 'A', '3035555626', '2022-09-01'),
+('STAT3278', 'A', '3035555626', '2022-09-01'),
 ('COMP3297', 'A', '3035604075', '2022-09-01'),
 ('COMP3297', 'A', '3035555626', '2022-09-01'),
 ('COMP3270', 'A', '3035604075', '2022-09-01'),
