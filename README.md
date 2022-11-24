@@ -23,7 +23,7 @@ python -m pip install -r requirements.txt
 2. Install frontend requiremnts by first going to the `COMP3278_final_project/frontend/` then run
 
 ```shell
-npm install
+npm install --force
 ```
 
 4. Make sure to put the appropriate DB information in `/backend.ini` and **COPY** it to `/backend/` directory
