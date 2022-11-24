@@ -25,11 +25,11 @@ INSERT INTO Subclass VALUES
 ('A', 'STAT3600', 'Teaching is composed of three hours of lectures and an one-hour tutorial class per week.');
 
 INSERT INTO SubclassInfo VALUES
-('A', 'COMP3278', 'Monday', '14:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3278', 'Thursday', '13:30', '15:20', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+('A', 'COMP3278', 'Monday', '14:30', '15:20', 'CYPP2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
+('A', 'COMP3278', 'Thursday', '13:30', '15:20', 'CPD-LG.1', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
 ('A', 'COMP3278', 'Sunday', '23:10', '23:40', 'MWT2', 'https://hku.zoom.us/j/96226740999?pwd=ZER1UUdxSVVhQzNXbXFkUDd3WjRBdz09'),
-('A', 'COMP3230', 'Tuesday', '10:30', '12:20', 'CPD-LG.01', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
-('A', 'COMP3230', 'Sunday', '22:30', '23:00', 'CPD-LG.01', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
+('A', 'COMP3230', 'Tuesday', '10:30', '12:20', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
+('A', 'COMP3230', 'Sunday', '22:30', '23:00', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/dFiU-ic0nH8P6wuB1UeocvO-9ikjf9aWZRCZ0bEBSnSMOoZswvTdlyyXlPIcPJUe.Tiy1retiylJzYUqy'),
 ('A', 'COMP3230', 'Thursday', '10:30', '12:20', 'CYPP2', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
 ('A', 'COMP3322', 'Monday', '15:30', '17:20', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
 ('A', 'COMP3322', 'Friday', '15:30', '17:20', 'CPD-LG.1', 'https://hku.zoom.us/rec/share/rxQkV5qC5cKvF4psOFDUiQXXbXrccKlDfSb5OFohnnSKnv1Cn4ayZ1mrB-yvALLg.OQ2Ia3-JEzVJoGf9'),
@@ -104,18 +104,29 @@ values
     (NULL, 'CYPP2'),
     (NULL, 'CYCP1'),
     (NULL, 'LE2'),
+    (NULL, 'CYC'),
+    (NULL, 'RHT'),
     (NULL, 'CPD-LG.1');
 
 insert into
     PathTime
 values
-    ('3035555626', 1, 3, 1, 300),
-    ('3035604075', 1, 3, 1, 330),
-    ('3035786603', 1, 3, 1, 300),
-    ('3035555626', 1, 3, 2, 100300),
-    ('3035604075', 1, 3, 2, 100330),
-    ('3035786603', 1, 3, 2, 100300),
-    ('3035555626', 3, 4, 1, 300),
-    ('3035604075', 3, 1, 1, 0),
-    ('3035786603', 1, 4, 1, 300),
-    ('3035786603', 4, 5, 1, 5000);
+    ('3035555626', 2, 6, 1, 300),
+    ('3035604075', 6, 5, 1, 320),
+    ('3035604075', 5, 3, 1, 10000),
+    ('3035604075', 3, 3, 1, 10000),
+    ('3035786603', 5, 7, 1, 123);
+
+-- insert into
+--     PathTime
+-- values
+--     ('3035555626', 1, 3, 1, 300),
+--     ('3035604075', 1, 3, 1, 330),
+--     ('3035786603', 1, 3, 1, 300),
+--     ('3035555626', 1, 3, 2, 100300),
+--     ('3035604075', 1, 3, 2, 100330),
+--     ('3035786603', 1, 3, 2, 100300),
+--     ('3035555626', 3, 4, 1, 300),
+--     ('3035604075', 3, 1, 1, 0),
+--     ('3035786603', 1, 4, 1, 300),
+--     ('3035786603', 4, 5, 1, 5000);
