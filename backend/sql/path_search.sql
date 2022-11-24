@@ -90,7 +90,7 @@ PathSearch (current_loca_id, time, path, depth) AS (
         IQRPathTime as IQRpt
         JOIN StartingLoca as sl ON (IQRpt.time_section = sl.time_section)
     WHERE
-        ps.time < 1000
+        ps.time < 10000000
         and ps.depth < 20
         and IQRpt.start_loca_id = ps.current_loca_id
         and not ps.path like CONCAT('%/', CAST(IQRpt.end_loca_id AS CHAR), '/%')

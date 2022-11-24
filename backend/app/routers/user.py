@@ -316,12 +316,11 @@ class PathTimeUpdateInput(BaseModel):
     student_id: str
     from_location: str
     to_location: str
-    time_section: int
     time_in_second: int
 
 @router.put("/update_path_time")
 async def update_path_time(request: PathTimeUpdateInput):
-    print(crud.update_path_time(request.student_id, request.from_location, request.to_location, request.time_section, request.time_in_second))
+    print(crud.update_path_time(request.student_id, request.from_location, request.to_location, 1, request.time_in_second))
 
     db_connector.commit()
 
@@ -343,9 +342,7 @@ async def path_to_coming_course(login_token: str):
         if len(previoud_course) != 0:
             from_loca = crud.get_course_location(previoud_course['CourseID'], previoud_course['SubclassID'], previoud_course['week_day'])[0][0][0]
             to_loca = crud.get_course_location(courses[0][1], courses[0][0], courses[0][2])[0][0][0]
-            
-            to_loca, from_loca = from_loca, to_loca
-            
+                        
             print("to_loca", to_loca, "from_loca", from_loca)
         
             req_res = GetPathInput(from_location=from_loca, to_location=to_loca, time_section = 1)

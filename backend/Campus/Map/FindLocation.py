@@ -1,7 +1,7 @@
 import cv2
 
 # read image
-image = cv2.imread('CampusMap.png')
+image = cv2.imread('backend\Campus\Map\CampusMap.png')
 # show the image, provide window name first
 # add wait key. window waits until user presses a key
 

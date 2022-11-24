@@ -34,6 +34,8 @@ function Information({
   const [status, setStatus] = useState(false);
   const [count, setCount] = useState(0);
 
+  const [suggestedTime, setSuggestedTime] = useState(0);
+
   useEffect(() => {
     if (events != null) {
       setStatus(true);
@@ -192,6 +194,41 @@ function Information({
                         </StepLabel>
                       </Step>
                     </Stepper>
+                    <div className="time_form">
+                      <input
+                        type="text"
+                        placeholder="Not accurate? ..."
+                        required
+                        id="suggested_time"
+                        onChange={(evt) => { setSuggestedTime(Number(evt.target.value)); }}
+                      />
+                      <button
+                      onClick={(e) => {
+                        const requestOptions = {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            student_id: studentId,
+                            from_location: path_des[0],
+                            to_location: path_des.at(-1),
+                            time_in_second: suggestedTime ? suggestedTime : 0,
+                          }),
+                        };
+
+                        console.log(requestOptions);
+
+                        fetch(`${link}user/update_path_time`, requestOptions)
+                          .then((response) => {
+                            return response.json();
+                          })
+                          .then((data) => {
+                            console.log(data);
+                          });
+                      }}
+                      >
+                        Suggest time
+                      </button>
+                    </div>
                     <MapImage data={path_image} />
                   </div>
                 ) : null}
